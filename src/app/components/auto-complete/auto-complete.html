@@ -1,0 +1,8 @@
+<p>auto-complete works!</p>
+<input type="text" placeholder="search..." [formControl]="searchControl" />
+
+@for (product of productList(); track product.id) {
+  <ul>
+    <li>{{ product.title }}</li>
+  </ul>
+}

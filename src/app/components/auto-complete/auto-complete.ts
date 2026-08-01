@@ -32,7 +32,6 @@ export class AutoComplete {
     filter((e) => e.length > 2),
     switchMap((v) => (v ? this.getProductList(v) : of([]))),
     map((e: any) => e.products),
-    tap((e) => console.log(e)),
   );
 
   productList = toSignal(this.product$);

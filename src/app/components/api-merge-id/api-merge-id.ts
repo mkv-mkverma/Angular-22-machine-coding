@@ -20,7 +20,7 @@ export class ApiMergeId {
         return users.map((user: any) => {
           return {
             ...user,
-            ...photos.find((p) => p.id === user.id),
+            ...photos.find((p) => p.id === user.id) ?? null,
           };
         });
       }),

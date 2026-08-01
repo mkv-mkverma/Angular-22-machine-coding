@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AutoComplete } from "./components/auto-complete/auto-complete";
+import { ApiMergeId } from "./components/api-merge-id/api-merge-id";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AutoComplete],
+  imports: [RouterOutlet, AutoComplete, ApiMergeId],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

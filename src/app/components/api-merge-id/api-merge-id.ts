@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { forkJoin, map, of } from 'rxjs';
+import { catchError, forkJoin, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-api-merge-id',
@@ -10,23 +10,6 @@ import { forkJoin, map, of } from 'rxjs';
 })
 export class ApiMergeId {
   private http = inject(HttpClient);
-
-  userData = forkJoin({
-    users: this.getUsers(),
-    photos: this.getPhotos(),
-  })
-    .pipe(
-      map(({ users, photos }) => {
-        return users.map((user: any) => {
-          return {
-            ...user,
-            ...photos.find((p) => p.id === user.id) ?? null,
-          };
-        });
-      }),
-    )
-    .subscribe(console.log);
-
   /**
  * Optimized for Large Data use Map Lookup
 
@@ -36,8 +19,8 @@ Create Map -> O(n) Lookup -> O(1) Overall = O(n)
  */
 
   userDataByMap = forkJoin({
-    users: this.getUsers(),
-    photos: this.getPhotos(),
+    users: this.getUsers().pipe(catchError((e) => of([]))),
+    photos: this.getPhotos().pipe(catchError((e) => of([]))),
   })
     .pipe(
       map(({ users, photos }) => {
@@ -46,7 +29,8 @@ Create Map -> O(n) Lookup -> O(1) Overall = O(n)
 
           return {
             ...user,
-            ...ph.get(user.id),
+            //  ...(photos.find((p) => p.id === user.id) ?? null),
+            ...(ph.get(user.id) ?? []),
           };
         });
       }),

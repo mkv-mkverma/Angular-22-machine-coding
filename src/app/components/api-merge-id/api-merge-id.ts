@@ -11,6 +11,7 @@ import { catchError, forkJoin, map, of } from 'rxjs';
 export class ApiMergeId {
   private http = inject(HttpClient);
   /**
+   * Paralle Independent API call
  * Optimized for Large Data use Map Lookup
 
 find() inside map() has O(n²) complexity.

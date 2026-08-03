@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { AutoComplete } from './components/auto-complete/auto-complete';
 import { ApiMergeId } from './components/api-merge-id/api-merge-id';
 import { SequenceApiCall } from './components/sequence-api-call/sequence-api-call';
+import { MergeMap } from './components/merge-map/merge-map';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,8 @@ import { SequenceApiCall } from './components/sequence-api-call/sequence-api-cal
     RouterOutlet,
     // AutoComplete,
     // ApiMergeId,
-    SequenceApiCall,
+    // SequenceApiCall,
+    MergeMap,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

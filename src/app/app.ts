@@ -7,6 +7,7 @@ import { MergeMap } from './components/merge-map/merge-map';
 import { ExhaustMap } from './components/exhaust-map/exhaust-map';
 import { CombineLatest } from './components/combine-latest/combine-latest';
 import { UserFilter } from './components/user-filter/user-filter';
+import { ShortPolling } from "./components/short-polling/short-polling";
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ import { UserFilter } from './components/user-filter/user-filter';
     ExhaustMap,
     CombineLatest,
     UserFilter,
-  ],
+    ShortPolling
+],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

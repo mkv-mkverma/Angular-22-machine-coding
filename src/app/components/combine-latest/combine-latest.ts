@@ -23,18 +23,20 @@ export class CombineLatest {
   emailControl = new FormControl('');
   passwordControl = new FormControl('');
 
-  // combineLatest combines the latest value from each observable and emits whenever any observable emits, after every observable has emitted at least once.
+  email$ = this.emailControl.valueChanges.pipe(
+    startWith(this.emailControl.value),
+    distinctUntilChanged(),
+    catchError(() => of('')),
+  );
 
-  data$ = combineLatest([
-    this.emailControl.valueChanges.pipe(
-      startWith(''),
-      catchError(() => of([])),
-    ),
-    this.passwordControl.valueChanges.pipe(
-      startWith(''),
-      catchError(() => of([])),
-    ),
-  ]).pipe(debounceTime(500), distinctUntilChanged());
+  password$ = this.passwordControl.valueChanges.pipe(
+    startWith(this.passwordControl.value),
+    distinctUntilChanged(),
+    catchError(() => of('')),
+  );
+
+  // combineLatest combines the latest value from each observable and emits whenever any observable emits, after every observable has emitted at least once.
+  data$ = combineLatest([this.email$, this.password$]);
 
   constructor() {
     this.data$.subscribe({

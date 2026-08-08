@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, inject, viewChild } from '@angular/core';
-import { Cons, exhaustMap, fromEvent, Subject } from 'rxjs';
+import { Component, inject } from '@angular/core';
+import { exhaustMap, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-exhaust-map',

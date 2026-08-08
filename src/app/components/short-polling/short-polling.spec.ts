@@ -13,7 +13,6 @@ describe('ShortPolling', () => {
 
     fixture = TestBed.createComponent(ShortPolling);
     component = fixture.componentInstance;
-    await fixture.whenStable();
   });
 
   it('should create', () => {

@@ -1,6 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { catchError, from, map, mergeMap, of, tap, toArray } from 'rxjs';
+import { catchError, from, mergeMap, of, toArray } from 'rxjs';
+
+interface UserSummary {
+  id: number;
+}
+
+interface UsersResponse {
+  users: UserSummary[];
+}
 
 @Component({
   selector: 'app-merge-map',
@@ -12,7 +20,7 @@ export class MergeMap {
   private http = inject(HttpClient);
 
   getUser() {
-    return this.http.get<any>('https://dummyjson.com/users');
+    return this.http.get<UsersResponse>('https://dummyjson.com/users');
   }
 
   getUserById(id: number) {
@@ -28,7 +36,7 @@ export class MergeMap {
   data = this.getUser()
     .pipe(
       mergeMap((user) => from(user.users)),
-      mergeMap((u: any) => this.getUserById(u.id).pipe(catchError(() => of([])))),
+      mergeMap((user) => this.getUserById(user.id).pipe(catchError(() => of([])))),
       toArray(),
     )
     .subscribe({

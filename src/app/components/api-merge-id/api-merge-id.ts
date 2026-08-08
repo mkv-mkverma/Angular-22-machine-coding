@@ -2,6 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { catchError, forkJoin, map, of } from 'rxjs';
 
+interface User {
+  id: number;
+  [key: string]: unknown;
+}
+
+interface Photo {
+  id: number;
+  [key: string]: unknown;
+}
+
 @Component({
   selector: 'app-api-merge-id',
   imports: [],
@@ -20,18 +30,19 @@ Create Map -> O(n) Lookup -> O(1) Overall = O(n)
  */
 
   userDataByMap = forkJoin({
-    users: this.getUsers().pipe(catchError((e) => of([]))),
-    photos: this.getPhotos().pipe(catchError((e) => of([]))),
+    users: this.getUsers().pipe(catchError(() => of<User[]>([]))),
+    photos: this.getPhotos().pipe(catchError(() => of<Photo[]>([]))),
   })
     .pipe(
       map(({ users, photos }) => {
-        return users.map((user: any) => {
-          const ph = new Map(photos.map((p) => [p.id, p]));
+        const photosById = new Map(photos.map((photo) => [photo.id, photo]));
+
+        return users.map((user) => {
 
           return {
             ...user,
             //  ...(photos.find((p) => p.id === user.id) ?? null),
-            ...(ph.get(user.id) ?? []),
+            ...(photosById.get(user.id) ?? {}),
           };
         });
       }),
@@ -39,10 +50,10 @@ Create Map -> O(n) Lookup -> O(1) Overall = O(n)
     .subscribe(console.log);
 
   getUsers() {
-    return this.http.get<any[]>(`https://jsonplaceholder.typicode.com/users`);
+    return this.http.get<User[]>('https://jsonplaceholder.typicode.com/users');
   }
 
   getPhotos() {
-    return this.http.get<any[]>(`https://jsonplaceholder.typicode.com/photos`);
+    return this.http.get<Photo[]>('https://jsonplaceholder.typicode.com/photos');
   }
 }

@@ -9,8 +9,22 @@ import {
   map,
   startWith,
   switchMap,
-  tap,
 } from 'rxjs';
+
+interface User {
+  id: number;
+  age: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  company: {
+    name: string;
+  };
+}
+
+interface UserResponse {
+  users: User[];
+}
 
 @Component({
   selector: 'app-user-filter',
@@ -56,10 +70,10 @@ export class UserFilter {
           // filter
           if (status === 'young') {
             // add any status-based logic here
-            users = [...users].filter((e: any) => e.age < 30);
+            users = [...users].filter((user) => user.age < 30);
           }
           if (status === 'old') {
-            users = [...users].filter((e: any) => e.age > 30);
+            users = [...users].filter((user) => user.age > 30);
           }
 
           // sort
@@ -77,9 +91,9 @@ export class UserFilter {
     ),
   );
 
-  getUserData(search: string = '') {
+  getUserData(search = '') {
     //dummyjson.com/users/search?a=text
-    https: return this.http.get<any>('https://dummyjson.com/users/search', {
+    return this.http.get<UserResponse>('https://dummyjson.com/users/search', {
       params: {
         q: search,
       },

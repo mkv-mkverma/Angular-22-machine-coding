@@ -5,6 +5,7 @@ import {
   combineLatest,
   combineLatestWith,
   debounceTime,
+  distinctUntilChanged,
   from,
   map,
   of,
@@ -33,7 +34,7 @@ export class CombineLatest {
       startWith(''),
       catchError(() => of([])),
     ),
-  ]).pipe(debounceTime(500));
+  ]).pipe(debounceTime(500), distinctUntilChanged());
 
   constructor() {
     this.data$.subscribe({

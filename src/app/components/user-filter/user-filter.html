@@ -1,0 +1,48 @@
+<h2>Search Filter</h2>
+
+<input type="text" [formControl]="searchControl" placeholder="Search name..." />
+
+<select [formControl]="sortControl">
+  <option value="firstName">First Name</option>
+  <option value="age">Age</option>
+</select>
+
+<select [formControl]="statusControl">
+  <option value="all">All</option>
+  <option value="young">Young</option>
+  <option value="old">Old</option>
+</select>
+
+<!-- how to use let -->
+<!-- @let userA =  user$| async;
+{{userA.length}} -->
+
+@if (user$ | async; as users) {
+  <p><strong>Length:</strong>{{ users.length }}</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Comapny</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of users; track user.id; let id = $index) {
+        <tr>
+          <td>{{ id + 1 }}</td>
+          <td>{{ user.firstName }} {{ user.lastName }}</td>
+          <td>{{ user.age }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.company.name }}</td>
+        </tr>
+      } @empty {
+        <tr col="4">
+          <p>No User Found</p>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

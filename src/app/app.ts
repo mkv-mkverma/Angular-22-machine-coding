@@ -5,6 +5,7 @@ import { ApiMergeId } from './components/api-merge-id/api-merge-id';
 import { SequenceApiCall } from './components/sequence-api-call/sequence-api-call';
 import { MergeMap } from './components/merge-map/merge-map';
 import { ExhaustMap } from './components/exhaust-map/exhaust-map';
+import { CombineLatest } from "./components/combine-latest/combine-latest";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ import { ExhaustMap } from './components/exhaust-map/exhaust-map';
     // SequenceApiCall,
     // MergeMap,
     ExhaustMap,
-  ],
+    CombineLatest
+],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

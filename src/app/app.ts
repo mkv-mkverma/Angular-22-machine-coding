@@ -1,25 +1,15 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ExhaustMap } from './components/exhaust-map/exhaust-map';
-import { CombineLatest } from './components/combine-latest/combine-latest';
-import { UserFilter } from './components/user-filter/user-filter';
-import { ShortPolling } from './components/short-polling/short-polling';
-import { CachedApi } from './components/cached-api/cached-api';
 import { Users } from './services/users';
+import { Header } from './header/header/header';
+import { Footer } from './footer/footer/footer';
 
 @Component({
   selector: 'app-root',
   imports: [
     RouterOutlet,
-    // AutoComplete,
-    // ApiMergeId,
-    // SequenceApiCall,
-    // MergeMap,
-    ExhaustMap,
-    CombineLatest,
-    UserFilter,
-    ShortPolling,
-    CachedApi,
+    Header,
+    Footer,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

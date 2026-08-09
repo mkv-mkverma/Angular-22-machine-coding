@@ -3,7 +3,7 @@ import { ResolveFn } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { Dashboard } from '../services/dashboard';
 
-interface DashboardResolverData {
+export interface DashboardResolverData {
   users: unknown[];
   permissions: unknown[];
   features: unknown[];

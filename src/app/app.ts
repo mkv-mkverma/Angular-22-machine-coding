@@ -1,9 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ExhaustMap } from './components/exhaust-map/exhaust-map';
 import { CombineLatest } from './components/combine-latest/combine-latest';
 import { UserFilter } from './components/user-filter/user-filter';
 import { ShortPolling } from './components/short-polling/short-polling';
+import { CachedApi } from './components/cached-api/cached-api';
+import { Users } from './services/users';
 
 @Component({
   selector: 'app-root',
@@ -16,11 +18,16 @@ import { ShortPolling } from './components/short-polling/short-polling';
     ExhaustMap,
     CombineLatest,
     UserFilter,
-    ShortPolling
-],
+    ShortPolling,
+    CachedApi,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
 export class App {
   protected readonly title = signal('Angular-22-machine-coding');
+  private userService = inject(Users);
+
+  // user$ = this.userService.getUsers().subscribe()
+  user$ = this.userService.getuserCashed().subscribe();
 }

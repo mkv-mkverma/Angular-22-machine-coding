@@ -1,0 +1,6 @@
+<p>
+  Angular HttpClient observables are cold, so every subscription starts a new HTTP request. I store
+  one shared observable in the service and use shareReplay(1) to share the request and cache its
+  latest response. I invalidate that cache after data-changing operations or when a refresh is
+  required.
+</p>

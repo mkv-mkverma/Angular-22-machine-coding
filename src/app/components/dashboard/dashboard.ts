@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Profile } from "../../profile/components/profile/profile";
 
 interface DashboardCard {
   title: string;
@@ -11,7 +10,7 @@ interface DashboardCard {
 
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterLink, Profile],
+  imports: [RouterLink],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
@@ -32,6 +31,24 @@ export class Dashboard {
       description: 'Refreshes data automatically at a fixed interval.',
       icon: '↻',
       route: '/short-polling',
+    },
+    {
+      title: 'Retry',
+      description: 'Retries a failed request automatically.',
+      icon: '↻',
+      route: '/retry',
+    },
+    {
+      title: 'Retry When',
+      description: 'Retries only retryable errors with a delay.',
+      icon: '⟳',
+      route: '/retry-when',
+    },
+    {
+      title: 'User Profile',
+      description: 'Loads a user profile using a route parameter.',
+      icon: '👤',
+      route: '/profile/1',
     },
   ];
 }

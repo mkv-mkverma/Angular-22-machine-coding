@@ -75,3 +75,9 @@ This fixes rules ESLint can safely correct automatically. Review the changes and
 
 git fetch origin # update local knowledge of GitHub branches
 git merge origin/main # bring latest main changes into your feature branch
+
+**Squash and merge** — combines all 11 PR commits into one clean commit on main. Best choice here; it keeps main history tidy.
+
+**Create a merge commit** — retains all 11 commits and creates an additional “merge” commit that joins your branch with main. Useful when you want to preserve the branch’s exact history.
+
+**Rebase and merge** — replays the 11 commits one-by-one on top of the latest main, with no merge commit. Keeps a linear history, but changes commit hashes.

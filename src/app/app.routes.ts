@@ -4,6 +4,8 @@ import { Dashboard } from './components/dashboard/dashboard';
 import { ExhaustMap } from './components/exhaust-map/exhaust-map';
 import { PageNotFound } from './components/page-not-found/page-not-found';
 import { ShortPolling } from './components/short-polling/short-polling';
+import { Retry } from './components/retry/retry';
+import { RetryWhen } from './components/retry-when/retry-when';
 import { dashboardResolver } from './resolvers/dashboard-resolver';
 import { Profile } from './profile/components/profile/profile';
 
@@ -24,6 +26,14 @@ export const routes: Routes = [
   {
     path: 'short-polling',
     component: ShortPolling,
+  },
+  {
+    path: 'retry',
+    component: Retry,
+  },
+  {
+    path: 'retry-when',
+    component: RetryWhen,
   },
   {
     path: 'autocomplete',

@@ -35,6 +35,12 @@ jobs:
         run: |
           npm run build -- --base-href="/Angular-22-machine-coding/"
 
+      # GitHub Pages serves this file for paths that do not exist on disk.
+      # Keeping a copy of the Angular entry point lets the client router handle
+      # deep links such as /profile/3.
+      - name: Add SPA fallback page
+        run: cp dist/Angular-22-machine-coding/browser/index.html dist/Angular-22-machine-coding/browser/404.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

@@ -72,3 +72,6 @@ npx ng lint --fix
 ```
 
 This fixes rules ESLint can safely correct automatically. Review the changes and resolve any remaining lint errors before committing.
+
+git fetch origin # update local knowledge of GitHub branches
+git merge origin/main # bring latest main changes into your feature branch

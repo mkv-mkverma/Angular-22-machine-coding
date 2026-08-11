@@ -6,27 +6,24 @@
   </div>
 
   <div class="card-grid">
-    <a class="dashboard-card" routerLink="/exhaust-map">
-      <span class="card-icon" aria-hidden="true">⇢</span>
-      <div>
-        <h2>Exhaust Map</h2>
-        <p>Ignores new clicks while the current request is in progress.</p>
-      </div>
-      <span class="card-action">Open <span aria-hidden="true">→</span></span>
-    </a>
-
-    <a class="dashboard-card" routerLink="/short-polling">
-      <span class="card-icon" aria-hidden="true">↻</span>
-      <div>
-        <h2>Short Polling</h2>
-        <p>Refreshes data automatically at a fixed interval.</p>
-      </div>
-      <span class="card-action">Open <span aria-hidden="true">→</span></span>
-    </a>
+    @for (card of cards; track card.route) {
+      <a class="dashboard-card" [routerLink]="card.route">
+        <span class="card-icon" aria-hidden="true">{{ card.icon }}</span>
+        <div>
+          <h2>{{ card.title }}</h2>
+          <p>{{ card.description }}</p>
+        </div>
+        <span class="card-action">Open <span aria-hidden="true">→</span></span>
+      </a>
+    }
   </div>
 </section>
 <section>
   <p>Users loaded: {{ dashboardData.users.length }}</p>
   <p>Permissions loaded: {{ dashboardData.permissions.length }}</p>
   <p>Features loaded: {{ dashboardData.features.length }}</p>
+</section>
+
+<section>
+  <app-profile />
 </section>

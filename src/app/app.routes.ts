@@ -5,6 +5,7 @@ import { ExhaustMap } from './components/exhaust-map/exhaust-map';
 import { PageNotFound } from './components/page-not-found/page-not-found';
 import { ShortPolling } from './components/short-polling/short-polling';
 import { dashboardResolver } from './resolvers/dashboard-resolver';
+import { Profile } from './profile/components/profile/profile';
 
 export const routes: Routes = [
   // Add route top to bottom
@@ -27,6 +28,10 @@ export const routes: Routes = [
   {
     path: 'autocomplete',
     component: AutoComplete,
+  },
+  {
+    path: 'profile/:id',
+    component: Profile,
   },
   {
     path: '**',

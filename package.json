@@ -9,6 +9,8 @@
     "test": "ng test --watch=false",
     "test:watch": "ng test",
     "prepare": "husky",
+    "test:coverage": "ng test --watch=false --coverage",
+    "ci:test": "ng test --no-watch --no-progress --coverage",
     "lint": "ng lint"
   },
   "private": true,
@@ -28,6 +30,7 @@
     "@angular/cli": "^22.1.2",
     "@angular/compiler-cli": "^22.1.0",
     "@eslint/js": "^10.0.1",
+    "@vitest/coverage-v8": "^4.1.10",
     "angular-eslint": "22.1.0",
     "eslint": "^10.6.0",
     "husky": "^9.1.7",

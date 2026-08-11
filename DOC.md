@@ -85,17 +85,40 @@ find() : Returns the first matching element/Object/Value. Stops searching immedi
 
 filter(): Returns all matches. Returns Array
 
+
 debounceTime() Wait until user stops doing something,then emit latest value.
 waits for a specified time and resets the timer whenever a new value arrives. It emits only when the user stops emitting values for that time.
-Autocomplete, Autosave, validation
+Ex: Autocomplete, Autosave, validation
+
+Wait until the user stops typing for a specified time, then emit the latest value.
+searchControl.valueChanges.pipe(
+  debounceTime(500),
+  switchMap(query =>
+    this.http.get(`https://dummyjson.com/products/search?q=${query}`)
+  )
+).subscribe(res => {
+  console.log(res);
+});
+
+
 
 throttleTime(): Emit the first value immediately. Emit immediately, ignore the rest for some time.
 Button CLick
+Emit the first value immediately, then ignore values for a specified time.
+fromEvent(window, 'scroll').pipe(
+  throttleTime(1000)
+).subscribe(() => {
+  this.http.get('https://dummyjson.com/products')
+    .subscribe(res => console.log(res));
+});
 
 auditTime(): Wait for the duration. Then emit the latest value. scroll, window resize, mouse movement
 
+Wait for the specified time, then emit the latest value received during that period.
+
 sampleTime(): emit the latest value available.At fixed intervals.
 Live dashboard, IOT sensor
+At every fixed interval, check the source and emit the latest value.
 
 switchMap unsubscribes from the previous inner observable whenever a new value comes from the source observable. It always keeps only the latest request active.
 Ex: Search autocomplete, Live search, Route parameter changes
@@ -170,6 +193,9 @@ next: value => console.log(value),
 error: err => console.log('Failed'),
 complete: () => console.log('Completed')
 });
+
+
+
 
 Dashboard has 20 APIs. How will you load faster?
 

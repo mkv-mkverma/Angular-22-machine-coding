@@ -1,0 +1,5 @@
+<section>
+  @if (user$ | async; as user) {
+    <strong>User Name</strong> {{ user.firstName }} - {{ user.lastName }}
+  }
+</section>

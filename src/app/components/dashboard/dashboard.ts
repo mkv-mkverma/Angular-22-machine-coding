@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Profile } from "../../profile/components/profile/profile";
 
 interface DashboardCard {
   title: string;
@@ -10,7 +11,7 @@ interface DashboardCard {
 
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterLink],
+  imports: [RouterLink, Profile],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })

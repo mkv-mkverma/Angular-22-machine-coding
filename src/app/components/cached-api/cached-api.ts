@@ -1,4 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Users } from '../../services/users';
 
 @Component({
@@ -8,7 +9,8 @@ import { Users } from '../../services/users';
   styleUrl: './cached-api.scss',
 })
 export class CachedApi {
-  private users = inject(Users)
+  private destroyRef = inject(DestroyRef);
+  private users = inject(Users);
 
   constructor(){
     // all API 4 times
@@ -17,8 +19,8 @@ export class CachedApi {
     // this.users.getUsers().subscribe()
     // this.users.getUsers().subscribe()
 
-    this.users.getuserCashed().subscribe()
-    this.users.getuserCashed().subscribe()
-    this.users.getuserCashed().subscribe()
+    this.users.getuserCashed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+    this.users.getuserCashed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+    this.users.getuserCashed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
 }

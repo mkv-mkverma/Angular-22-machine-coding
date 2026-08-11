@@ -12,7 +12,10 @@ describe('App', () => {
         provideRouter([]),
         {
           provide: Users,
-          useValue: { getuserCashed: () => of([]) },
+          useValue: {
+            getUsers: () => of([]),
+            getuserCashed: () => of([]),
+          },
         },
       ],
     }).compileComponents();

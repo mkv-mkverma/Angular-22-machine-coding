@@ -1,0 +1,14 @@
+<section aria-labelledby="retry-when-title">
+  <h2 id="retry-when-title">Retry with a condition</h2>
+  <pre>
+API call
+   ↓
+Request fails
+   ↓
+Is it a 404 error?
+   ├── Yes → stop and return the error
+   └── No  → wait 1 second, then retry
+                    ↓
+              Up to 3 retries
+  </pre>
+</section>

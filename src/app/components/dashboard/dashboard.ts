@@ -9,6 +9,13 @@ interface DashboardCard {
   route: string;
 }
 
+interface DashboardCard {
+  title: string;
+  description: string;
+  icon: string;
+  route: string;
+}
+
 @Component({
   selector: 'app-dashboard',
   imports: [RouterLink, Profile],
@@ -32,6 +39,24 @@ export class Dashboard {
       description: 'Refreshes data automatically at a fixed interval.',
       icon: '↻',
       route: '/short-polling',
+    },
+    {
+      title: 'Retry',
+      description: 'Retries a failed request automatically.',
+      icon: '↻',
+      route: '/retry',
+    },
+    {
+      title: 'Retry When',
+      description: 'Retries only retryable errors with a delay.',
+      icon: '⟳',
+      route: '/retry-when',
+    },
+    {
+      title: 'User Profile',
+      description: 'Loads a user profile using a route parameter.',
+      icon: '👤',
+      route: '/profile/1',
     },
   ];
 }

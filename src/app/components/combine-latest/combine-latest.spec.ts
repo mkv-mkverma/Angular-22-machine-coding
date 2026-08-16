@@ -19,4 +19,15 @@ describe('CombineLatest', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('emits the latest email and password values', () => {
+    const values: [string | null, string | null][] = [];
+    const subscription = component.data$.subscribe((value) => values.push(value));
+
+    component.emailControl.setValue('manish@example.com');
+    component.passwordControl.setValue('secret');
+
+    expect(values.at(-1)).toEqual(['manish@example.com', 'secret']);
+    subscription.unsubscribe();
+  });
 });

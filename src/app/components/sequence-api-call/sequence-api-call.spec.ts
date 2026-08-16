@@ -34,6 +34,16 @@ describe('SequenceApiCall', () => {
     httpMock.expectOne('https://dummyjson.com/posts/10/comments').flush({ comments: [{ id: 100 }] });
   });
 
+  it('triggers the click handler bound in the template', () => {
+    fixture.detectChanges();
+    const button: HTMLButtonElement = fixture.nativeElement.querySelector('button');
+    button.click();
+
+    httpMock.expectOne('https://dummyjson.com/users/1').flush({ id: 1 });
+    httpMock.expectOne('https://dummyjson.com/posts/user/1').flush({ posts: [{ id: 10 }] });
+    httpMock.expectOne('https://dummyjson.com/posts/10/comments').flush({ comments: [] });
+  });
+
   it('provides individual API methods', () => {
     component.getUsersByID(2).subscribe();
     httpMock.expectOne('https://dummyjson.com/users/2').flush({ id: 2 });

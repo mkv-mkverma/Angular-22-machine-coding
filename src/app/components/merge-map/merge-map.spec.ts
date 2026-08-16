@@ -44,4 +44,12 @@ describe('MergeMap', () => {
     httpMock.expectOne('https://dummyjson.com/users/2').flush('error', { status: 500, statusText: 'Server Error' });
     fixtureWithUsers.destroy();
   });
+
+  it('logs an error when the top-level user list request fails', () => {
+    const fixtureWithFailure = TestBed.createComponent(MergeMap);
+    httpMock
+      .expectOne('https://dummyjson.com/users')
+      .flush('error', { status: 500, statusText: 'Server Error' });
+    fixtureWithFailure.destroy();
+  });
 });

@@ -39,4 +39,12 @@ describe('ExhaustMap', () => {
     component.getUserDetails(4).subscribe((user) => expect(user).toEqual({ id: 4 }));
     httpMock.expectOne('https://dummyjson.com/users/4').flush({ id: 4 });
   });
+
+  it('triggers the click handler bound in the template', () => {
+    fixture.detectChanges();
+    const button: HTMLButtonElement = fixture.nativeElement.querySelector('button');
+    button.click();
+
+    httpMock.expectOne('https://dummyjson.com/users/1').flush({ id: 1 });
+  });
 });

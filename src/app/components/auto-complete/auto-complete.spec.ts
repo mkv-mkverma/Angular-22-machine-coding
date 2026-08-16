@@ -47,4 +47,22 @@ describe('AutoComplete', () => {
     component.getProductList('phone case').subscribe();
     httpMock.expectOne('https://dummyjson.com/products/search?q=phone%20case').flush({ products: [] });
   });
+
+  it('renders a list item per matching product', () => {
+    vi.useFakeTimers();
+    try {
+      component.searchControl.setValue('laptop');
+      vi.advanceTimersByTime(500);
+      httpMock.expectOne('https://dummyjson.com/products/search?q=laptop').flush({
+        products: [{ id: 1, title: 'Laptop' }],
+      });
+
+      fixture.detectChanges();
+      const items: NodeListOf<HTMLLIElement> = fixture.nativeElement.querySelectorAll('li');
+      expect(items.length).toBe(1);
+      expect(items[0].textContent).toContain('Laptop');
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 });

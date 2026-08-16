@@ -44,6 +44,26 @@ describe('Todos', () => {
     });
   });
 
+  it('renders the empty state when there are no todos', () => {
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain('No Record Found');
+  });
+
+  it('renders a row per todo', () => {
+    const otherFixture = TestBed.createComponent(Todos);
+    httpMock.expectOne('http://localhost:3000/getTodos').flush({
+      todos: [{ id: 1, todo: 'Learn testing', completed: true, userId: 1 }],
+      total: 1,
+      skip: 0,
+      limit: 30,
+    });
+
+    otherFixture.detectChanges();
+    const rows: NodeListOf<HTMLTableRowElement> = otherFixture.nativeElement.querySelectorAll('tbody tr');
+    expect(rows.length).toBe(1);
+    expect(rows[0].textContent).toContain('Learn testing');
+  });
+
   it('sends requests for an individual todo and todo changes', () => {
     const todo = { id: 1, todo: 'Learn testing', completed: false, userId: 1 };
 

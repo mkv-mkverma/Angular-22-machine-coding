@@ -78,4 +78,43 @@ describe('UserFilter', () => {
       vi.useRealTimers();
     }
   });
+
+  it('renders a row per matching user', () => {
+    vi.useFakeTimers();
+    try {
+      fixture.detectChanges();
+      vi.advanceTimersByTime(500);
+
+      httpMock.expectOne('https://dummyjson.com/users/search?q=').flush({
+        users: [
+          { id: 1, firstName: 'Adam', lastName: 'B', age: 18, email: 'a@example.com', company: { name: 'Acme' } },
+        ],
+      });
+
+      fixture.detectChanges();
+
+      const rows: NodeListOf<HTMLTableRowElement> = fixture.nativeElement.querySelectorAll('tbody tr');
+      expect(rows.length).toBe(1);
+      expect(rows[0].textContent).toContain('Adam');
+      expect(fixture.nativeElement.textContent).toContain('Length:1');
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it('renders the empty state when no user matches', () => {
+    vi.useFakeTimers();
+    try {
+      fixture.detectChanges();
+      vi.advanceTimersByTime(500);
+
+      httpMock.expectOne('https://dummyjson.com/users/search?q=').flush({ users: [] });
+
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.textContent).toContain('No User Found');
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 });

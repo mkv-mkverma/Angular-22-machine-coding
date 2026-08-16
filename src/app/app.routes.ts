@@ -8,6 +8,7 @@ import { Retry } from './components/retry/retry';
 import { RetryWhen } from './components/retry-when/retry-when';
 import { dashboardResolver } from './resolvers/dashboard-resolver';
 import { Profile } from './profile/components/profile/profile';
+import { Todos } from './components/todos/todos';
 
 export const routes: Routes = [
   // Add route top to bottom
@@ -42,6 +43,10 @@ export const routes: Routes = [
   {
     path: 'profile/:id',
     component: Profile,
+  },
+  {
+    path: 'todos',
+    component: Todos,
   },
   {
     path: '**',

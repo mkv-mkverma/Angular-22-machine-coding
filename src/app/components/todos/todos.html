@@ -1,0 +1,24 @@
+<p>Todo Applications</p>
+
+<table>
+  <thead>
+    <tr>
+      <td>Id</td>
+      <td>Todo</td>
+      <td>Completed</td>
+    </tr>
+  </thead>
+  <tbody>
+    @for (todo of todos(); track todo.id) {
+      <tr>
+        <td>{{ todo.id }}</td>
+        <td>{{ todo.todo }}</td>
+        <td>{{ todo.completed }}</td>
+      </tr>
+    } @empty {
+      <tr>
+        <td>No Record Found</td>
+      </tr>
+    }
+  </tbody>
+</table>

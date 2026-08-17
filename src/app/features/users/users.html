@@ -1,0 +1,8 @@
+<p>User Me Details</p>
+{{ userMeData()?.firstName }} {{ userMeData()?.lastName }}
+
+<p>Email: {{ userMeData()?.email }}</p>
+<p>Age: {{ userMeData()?.age }}</p>
+<button (click)="logout()">Logout</button>
+<button (click)="callMe()">Call Me</button>
+<button (click)="fireFive()">Fire 5</button>

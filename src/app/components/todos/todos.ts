@@ -26,14 +26,11 @@ interface TodosResponse {
 export class Todos {
   private http = inject(HttpClient);
 
-  todos = toSignal(
-    this.getTodos().pipe(map((response) => response.todos)),
-    { initialValue: [] },
-  );
+  todos = toSignal(this.getTodos().pipe(map((response) => response.todos)), { initialValue: [] });
 
   getTodos() {
-    // return this.http.get('https://jsonplaceholder.typicode.com/todos');
-    return this.http.get<TodosResponse>('http://localhost:3000/getTodos');
+    return this.http.get<TodosResponse>('https://dummyjson.com/todos');
+    // return this.http.get<TodosResponse>('http://localhost:3000/getTodos');
   }
 
   getTodo(id: number) {

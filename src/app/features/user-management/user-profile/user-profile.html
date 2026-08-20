@@ -1,0 +1,14 @@
+<a routerLink="add">Add User</a>
+<router-outlet />
+
+<div class="profile-card">
+  <div class="profile-card__row">
+    <span class="profile-card__label">Name</span> {{ userName() }}
+  </div>
+  <div class="profile-card__row">
+    <span class="profile-card__label">Age</span> {{ user()?.age }}
+  </div>
+  <div class="profile-card__row">
+    <span class="profile-card__label">First name</span> {{ firstName | async }}
+  </div>
+</div>

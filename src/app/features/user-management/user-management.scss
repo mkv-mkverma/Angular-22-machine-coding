@@ -1,0 +1,22 @@
+.user-management {
+  display: flex;
+  gap: 1rem;
+}
+
+.user-list {
+  flex: 1;
+}
+
+.user-detail {
+  flex: 1;
+}
+
+a{
+  text-decoration: none;
+  background-color: crimson;
+  color: white;
+  border: 1px solid;
+  padding: 4px 10px;
+  border-radius: 4px;
+
+}

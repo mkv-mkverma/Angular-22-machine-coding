@@ -18,7 +18,7 @@ describe('Todos', () => {
     fixture = TestBed.createComponent(Todos);
     component = fixture.componentInstance;
     httpMock = TestBed.inject(HttpTestingController);
-    httpMock.expectOne('http://localhost:3000/getTodos').flush({
+    httpMock.expectOne('https://dummyjson.com/todos').flush({
       todos: [],
       total: 0,
       skip: 0,
@@ -36,7 +36,7 @@ describe('Todos', () => {
   it('loads todos from the mock API', () => {
     component.getTodos().subscribe((response) => expect(response.todos[0].todo).toBe('Go to the gym'));
 
-    httpMock.expectOne('http://localhost:3000/getTodos').flush({
+    httpMock.expectOne('https://dummyjson.com/todos').flush({
       todos: [{ id: 30, todo: 'Go to the gym', completed: true, userId: 142 }],
       total: 254,
       skip: 0,
@@ -51,7 +51,7 @@ describe('Todos', () => {
 
   it('renders a row per todo', () => {
     const otherFixture = TestBed.createComponent(Todos);
-    httpMock.expectOne('http://localhost:3000/getTodos').flush({
+    httpMock.expectOne('https://dummyjson.com/todos').flush({
       todos: [{ id: 1, todo: 'Learn testing', completed: true, userId: 1 }],
       total: 1,
       skip: 0,

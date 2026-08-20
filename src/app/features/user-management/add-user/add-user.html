@@ -1,0 +1,30 @@
+<form (submit)="onSubmit()">
+  <p>
+    <label for="firstName">First Name</label>
+    <input
+      type="text"
+      id="firstName"
+      name="firstName"
+      [(ngModel)]="firstName"
+      placeholder="firstName"
+    />
+  </p>
+  <p>
+    <label for="lastName">Last Name</label>
+    <input
+      type="text"
+      id="lastName"
+      name="lastName"
+      [(ngModel)]="lastName"
+      placeholder="lastName"
+    />
+  </p>
+  <p>
+    <label for="age">Age</label>
+    <input type="text" id="age" name="age" [(ngModel)]="age" placeholder="age" />
+  </p>
+  <p>
+    <a routerLink="../">Cancel</a>
+    <button type="submit">Add</button>
+  </p>
+</form>

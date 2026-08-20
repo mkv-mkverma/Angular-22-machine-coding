@@ -2,14 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  map,
-  of,
-  switchMap,
-} from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, of, switchMap } from 'rxjs';
 
 interface Product {
   id: number;
@@ -37,13 +30,15 @@ export class AutoComplete {
     map((value) => value.trim()),
     distinctUntilChanged(),
     filter((e) => e.length > 2),
+    // switchMap unsubscribes from the previous inner Observable when a new value arrives, while
+    // mergeMap keeps previous inner Observables running concurrently.
     switchMap((value) =>
       value ? this.getProductList(value) : of<ProductSearchResponse>({ products: [] }),
     ),
     map((response) => response.products),
   );
 
-  productList = toSignal(this.product$);
+  productList = toSignal(this.product$, { initialValue: [] });
 
   getProductList(searchText: string) {
     return this.http.get<ProductSearchResponse>(

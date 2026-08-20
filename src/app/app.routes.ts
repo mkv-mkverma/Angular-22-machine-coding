@@ -6,22 +6,26 @@ import { PageNotFound } from './components/page-not-found/page-not-found';
 import { ShortPolling } from './components/short-polling/short-polling';
 import { Retry } from './components/retry/retry';
 import { RetryWhen } from './components/retry-when/retry-when';
-import { dashboardResolver } from './resolvers/dashboard-resolver';
+import { dashboardResolver, dashboardResolverTest } from './resolvers/dashboard-resolver';
 import { Profile } from './profile/components/profile/profile';
 import { Todos } from './components/todos/todos';
 import { Login } from './features/login/login';
 import { Users } from './features/users/users';
-
+import { UserManagement } from './features/user-management/user-management';
+import { routes as usersManagementRoutes } from './features/user-management/user-management.route';
 export const routes: Routes = [
   // Add route top to bottom
   {
-    path: '',
+    path: '', // domain-name/
     component: Dashboard,
     title: 'Dashboard',
     pathMatch: 'full',
+    runGuardsAndResolvers: 'always',
     resolve: {
       dashboardResolver,
+      dashboardResolverTest,
     },
+    data: { message: 'Hello' },
   },
   {
     path: 'exhaust-map',
@@ -67,6 +71,12 @@ export const routes: Routes = [
     path: 'users',
     component: Users,
     title: 'Users',
+  },
+  {
+    path: 'user',
+    component: UserManagement,
+    title: 'User Management',
+    children: usersManagementRoutes,
   },
   {
     path: '**',

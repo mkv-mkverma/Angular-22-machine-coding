@@ -1,0 +1,20 @@
+<a routerLink="./" [queryParams]="{ order: order() === 'asc' ? 'desc' : 'asc' }"
+  >Sort - input(): {{ order() === 'asc' ? 'Descending' : 'Ascending' }}</a
+>
+<a routerLink="./" [queryParams]="{ order: orderI === 'asc' ? 'desc' : 'asc' }"
+  >Sort - activated route: {{ orderI === 'asc' ? 'Descending' : 'Ascending' }}</a
+>
+<hr />
+<div class="user-management">
+  <div class="user-list">
+    @for (user of users(); track user.id) {
+      <app-user [user]="user" (deleted)="onUserDeleted($event)" />
+    } @empty {
+      <p>No users Found!</p>
+    }
+  </div>
+
+  <div class="user-detail">
+    <router-outlet />
+  </div>
+</div>

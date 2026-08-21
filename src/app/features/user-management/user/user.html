@@ -1,0 +1,8 @@
+<div class="user-card">
+  <a class="user-card__link" [routerLink]="['/user', user().id]">
+    <img class="user-card__avatar" [src]="user().image" [alt]="user().firstName" />
+    <span class="user-card__name">{{ user().firstName }} {{ user().lastName }}</span>
+  </a>
+  <button type="button" class="user-card__action" (click)="delete(user().id)">Delete</button>
+</div>
+

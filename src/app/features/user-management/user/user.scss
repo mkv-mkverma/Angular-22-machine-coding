@@ -1,0 +1,40 @@
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__name {
+    font-weight: 500;
+  }
+
+  &__action {
+    border: 1px solid #e5e7eb;
+    background: none;
+    border-radius: 0.375rem;
+    padding: 0.25rem 0.75rem;
+    cursor: pointer;
+    color: #b91c1c;
+
+    &:hover {
+      background: #fef2f2;
+    }
+  }
+}

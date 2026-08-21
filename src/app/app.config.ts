@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding, withRouterConfig } from '@angular/router';
 
 import { routes } from './app.routes';
 import { API_URL } from './components/core/tokens/api-url.token';
@@ -14,7 +14,16 @@ import { loggingInterceptor } from './core/interceptors/logging-interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
+    // maps route parameters, query parameters, and route data directly to component inputs
+    provideRouter(
+      routes,
+      // input parent route
+      withComponentInputBinding(),
+      // input child route will work now
+      withRouterConfig({
+        paramsInheritanceStrategy: 'always',
+      }),
+    ),
     { provide: API_URL, useValue: environment.apiUrl },
     provideHttpClient(
       withInterceptors([

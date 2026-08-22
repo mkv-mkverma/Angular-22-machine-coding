@@ -66,4 +66,10 @@ export const DASHBOARD_CARDS: DashboardCard[] = [
     icon: '➡️',
     route: '/sequence-api-call',
   },
+  {
+    title: 'User Filter',
+    description: 'Combines search, sort, and status form controls into one filtered API request.',
+    icon: '🔍',
+    route: '/user-filter',
+  },
 ];

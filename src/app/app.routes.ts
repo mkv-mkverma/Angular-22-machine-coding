@@ -18,6 +18,7 @@ import { CombineLatest } from './components/combine-latest/combine-latest';
 import { ApiMergeId } from './components/api-merge-id/api-merge-id';
 import { CachedApi } from './components/cached-api/cached-api';
 import { SequenceApiCall } from './components/sequence-api-call/sequence-api-call';
+import { UserFilter } from './components/user-filter/user-filter';
 export const routes: Routes = [
   // Add route top to bottom
   {
@@ -107,6 +108,11 @@ export const routes: Routes = [
     path: 'sequence-api-call',
     component: SequenceApiCall,
     title: 'Sequence Api Call',
+  },
+  {
+    path: 'user-filter',
+    component: UserFilter,
+    title: 'User Filter',
   },
   {
     path: '**',

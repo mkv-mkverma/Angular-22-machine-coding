@@ -1,20 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Profile } from '../../profile/components/profile/profile';
-
-interface DashboardCard {
-  title: string;
-  description: string;
-  icon: string;
-  route: string;
-}
-
-interface DashboardCard {
-  title: string;
-  description: string;
-  icon: string;
-  route: string;
-}
+import { DASHBOARD_CARDS } from './dashboard.constant';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,36 +14,5 @@ export class Dashboard {
 
   dashboardData = this.route.snapshot.data['dashboardResolver'];
   message = this.route.snapshot.data['message'];
-  readonly cards: DashboardCard[] = [
-    {
-      title: 'Exhaust Map',
-      description: 'Ignores new clicks while the current request is in progress.',
-      icon: '⇢',
-      route: '/exhaust-map',
-    },
-    {
-      title: 'Short Polling',
-      description: 'Refreshes data automatically at a fixed interval.',
-      icon: '↻',
-      route: '/short-polling',
-    },
-    {
-      title: 'Retry',
-      description: 'Retries a failed request automatically.',
-      icon: '↻',
-      route: '/retry',
-    },
-    {
-      title: 'Retry When',
-      description: 'Retries only retryable errors with a delay.',
-      icon: '⟳',
-      route: '/retry-when',
-    },
-    {
-      title: 'User Profile',
-      description: 'Loads a user profile using a route parameter.',
-      icon: '👤',
-      route: '/profile/1',
-    },
-  ];
+  readonly cards = DASHBOARD_CARDS;
 }

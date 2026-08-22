@@ -30,7 +30,8 @@ export class CombineLatest {
     catchError(() => of('')),
   );
 
-  // combineLatest combines the latest value from each observable and emits whenever any observable emits, after every observable has emitted at least once.
+  // combineLatest combines the latest value from each observable and 
+  // emits whenever any observable emits, after every observable has emitted at least once.
   data$ = combineLatest([this.email$, this.password$]);
 
   constructor() {

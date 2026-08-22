@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { concatMap, map } from 'rxjs';
+import { concatMap, Subject } from 'rxjs';
 
 interface User {
   id: number;
@@ -36,6 +36,7 @@ getComments(post.id)
 })
 export class SequenceApiCall {
   private http = inject(HttpClient);
+  click$ = new Subject<number>();
 
   getPostsByUID(userId: number) {
     return this.http.get<PostsResponse>(`https://dummyjson.com/posts/user/${userId}`);
@@ -50,13 +51,14 @@ export class SequenceApiCall {
   }
 
   loadData() {
-    this.getUsersByID(1)
-      .pipe(
-        map((e) => e.id),
-        concatMap((id) => this.getPostsByUID(id)),
-        map((e) => e.posts[0].id),
-        concatMap((pid) => this.getComentsByPID(pid)),
-      )
-      .subscribe(console.log);
+    this.click$.next(1);
   }
+
+  post$ = this.click$
+    .pipe(
+      concatMap((id) => this.getUsersByID(id)),
+      concatMap((user) => this.getPostsByUID(user.id)),
+      concatMap((post) => this.getComentsByPID(post.posts[0].id)),
+    )
+    .subscribe(console.log);
 }

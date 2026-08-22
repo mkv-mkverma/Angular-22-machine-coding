@@ -1,10 +1,8 @@
-import { Component, DestroyRef, inject, OnDestroy, OnInit, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Users } from './services/users';
 import { Header } from './header/header/header';
 import { Footer } from './footer/footer/footer';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,30 +10,30 @@ import { Subscription } from 'rxjs';
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App implements OnInit, OnDestroy {
+export class App {
   protected readonly title = signal('Angular-22-machine-coding');
   private destroyRef = inject(DestroyRef);
   private userService = inject(Users);
 
   // user$ = this.userService.getUsers().subscribe()
   // If used outside an injection context, you can provide DestroyRef:
-  user$ = this.userService.getuserCashed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+  // user$ = this.userService.getuserCashed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
 
   // For observables used directly in the template,
   // I prefer AsyncPipe because Angular manages the subscription lifecycle automatically."
-  sub$ = this.userService.getUsers().subscribe();
+  // sub$ = this.userService.getUsers().subscribe();
 
-  constructor() {
-    this.userService
-      .getUsers()
-      .pipe(takeUntilDestroyed())
-      .subscribe((users) => {
-        console.log(users);
-      });
-  }
+  // constructor() {
+  //   this.userService
+  //     .getUsers()
+  //     .pipe(takeUntilDestroyed())
+  //     .subscribe((users) => {
+  //       console.log(users);
+  //     });
+  // }
 
   // switchMap() can cancel previous HTTP requests
-  
+
   // Some operators can naturally limit the subscription: take(1), first(), take(5)
   // Once the condition is satisfied, the observable completes and no manual unsubscribe is required.
   // this.route.params
@@ -44,15 +42,15 @@ export class App implements OnInit, OnDestroy {
   //     console.log(params);
   //   });
 
-  private subscription!: Subscription;
+  // private subscription!: Subscription;
 
-  ngOnInit() {
-    this.subscription = this.userService.getUsers().subscribe();
-  }
+  // ngOnInit() {
+  //   this.subscription = this.userService.getUsers().subscribe();
+  // }
 
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
+  // ngOnDestroy() {
+  //   if (this.subscription) {
+  //     this.subscription.unsubscribe();
+  //   }
+  // }
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { catchError, from, mergeMap, of, toArray } from 'rxjs';
 
 interface UserSummary {
@@ -38,6 +39,7 @@ export class MergeMap {
       mergeMap((user) => from(user.users)),
       mergeMap((user) => this.getUserById(user.id).pipe(catchError(() => of([])))),
       toArray(),
+      takeUntilDestroyed(),
     )
     .subscribe({
       next: (value) => console.log(value),

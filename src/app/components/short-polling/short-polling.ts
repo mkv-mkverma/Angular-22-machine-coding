@@ -37,8 +37,25 @@ export class ShortPolling {
 
   // private destroyRef = inject(DestroyRef);
 
+
+/**
+ * takeUntilDestroyed() is called inside Angular's injection context 
+ * (like a component constructor/field initializer), 
+ * Angular's DI system knows the current component and its DestroyRef.
+ */
+
+  // users$
+  //   .pipe(
+  //     takeUntilDestroyed()
+  //   )
+  //   .subscribe(data => {
+  //     console.log(data);
+  //   });
+
+  // or
+
   // ngOnInit() {
-  //   interval(5000)
+  //   timer(0, 1000)
   //     .pipe(
   //       switchMap(() => this.http.get('https://dummyjson.com/users/1')),
   //       takeUntilDestroyed(this.destroyRef)

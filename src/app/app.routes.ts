@@ -13,6 +13,11 @@ import { Login } from './features/login/login';
 import { Users } from './features/users/users';
 import { UserManagement } from './features/user-management/user-management';
 import { routes as usersManagementRoutes } from './features/user-management/user-management.route';
+import { MergeMap } from './components/merge-map/merge-map';
+import { CombineLatest } from './components/combine-latest/combine-latest';
+import { ApiMergeId } from './components/api-merge-id/api-merge-id';
+import { CachedApi } from './components/cached-api/cached-api';
+import { SequenceApiCall } from './components/sequence-api-call/sequence-api-call';
 export const routes: Routes = [
   // Add route top to bottom
   {
@@ -77,6 +82,31 @@ export const routes: Routes = [
     component: UserManagement,
     title: 'User Management',
     children: usersManagementRoutes,
+  },
+  {
+    path: 'merge-map',
+    component: MergeMap,
+    title: 'Merge Map',
+  },
+  {
+    path: 'combine-latest',
+    component: CombineLatest,
+    title: 'Combine Latest',
+  },
+  {
+    path: 'api-merge-id',
+    component: ApiMergeId,
+    title: 'Api Merge Id',
+  },
+  {
+    path: 'cached-api',
+    component: CachedApi,
+    title: 'Cached Api',
+  },
+  {
+    path: 'sequence-api-call',
+    component: SequenceApiCall,
+    title: 'Sequence Api Call',
   },
   {
     path: '**',

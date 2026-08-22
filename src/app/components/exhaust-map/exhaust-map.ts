@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { exhaustMap, Subject } from 'rxjs';
 
@@ -10,14 +10,21 @@ import { exhaustMap, Subject } from 'rxjs';
   styleUrl: './exhaust-map.scss',
 })
 export class ExhaustMap {
-  private destroyRef = inject(DestroyRef);
   private http = inject(HttpClient);
 
   loginClicks$ = new Subject<number>();
 
   constructor() {
+    // takeUntilDestroyed() → Use when you're in an Angular injection context
+    // like the constructor or component, so Angular can automatically get the DestroyRef.
+
+    // takeUntilDestroyed(this.destroyRef) → Use when you're outside the injection context,
+    // such as ngOnInit(), and you need to explicitly provide the DestroyRef.
     this.loginClicks$
-      .pipe(exhaustMap((id) => this.getUserDetails(id)), takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        exhaustMap((id) => this.getUserDetails(id)),
+        takeUntilDestroyed(),
+      )
       .subscribe(console.log);
   }
 

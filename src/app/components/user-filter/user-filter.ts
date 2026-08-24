@@ -92,7 +92,7 @@ export class UserFilter {
   );
 
   getUserData(search = '') {
-    //dummyjson.com/users/search?a=text
+    //dummyjson.com/users/search?q=phone
     return this.http.get<UserResponse>('https://dummyjson.com/users/search', {
       params: {
         q: search,

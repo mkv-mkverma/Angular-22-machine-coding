@@ -1,6 +1,9 @@
 .app-content {
   width: min(100% - 2rem, 72rem);
-  min-height: calc(100vh - 9rem);
+  // Reserved tall enough to cover the Dashboard route (13 cards @ 2 columns + sections),
+  // so <app-footer> settles in its final spot immediately instead of jumping down once the
+  // resolver-gated Dashboard content mounts. Bump this if the dashboard grid grows further.
+  min-height: max(calc(100vh - 9rem), 118rem);
   margin: 0 auto;
   padding: 2rem 0;
 }

@@ -1,0 +1,14 @@
+<div class="memory-leak-child">
+  <h3>Leaky child</h3>
+
+  <ul>
+    <li>interval$ subscription ticks: {{ intervalTicks() }}</li>
+    <li>setInterval ticks: check the console (logs every 1.5s)</li>
+    <li>self-rescheduling setTimeout ticks: {{ timeoutTicks() }}</li>
+    <li>document mousemove listener: {{ mouseX() }}, {{ mouseY() }}</li>
+    <li>window resize listener: {{ windowWidth() }}px</li>
+    <li>detached DOM nodes leaked: {{ leakedNodeCount() }}</li>
+  </ul>
+
+  <button #leakTarget type="button" (click)="leakDomNode()">Clone + leak this node</button>
+</div>

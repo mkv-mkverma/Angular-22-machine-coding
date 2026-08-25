@@ -1,0 +1,15 @@
+<p>rxresource works!</p>
+<input type="text" [ngModel]="search()" (ngModelChange)="search.set($event)"/>
+
+@if (productsResource.isLoading()) {
+  <p>Loading...</p>
+}
+@if (productsResource.error()) {
+  <p>Error: {{ productsResource.error() }}</p>
+}
+
+<ul>
+  @for (product of productsResource.value()?.products; track product.id) {
+    <li>{{ product.title }} — {{ product.price }}</li>
+  }
+</ul>

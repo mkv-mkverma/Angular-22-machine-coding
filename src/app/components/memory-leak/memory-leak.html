@@ -1,0 +1,19 @@
+<section class="memory-leak-demo">
+  <h2>Memory Leak Playground</h2>
+  <p>
+    Mount and unmount the child a few times with the console open. The counters keep climbing
+    even after "Destroy child" removes it from the DOM — every leak is catalogued in
+    <code>MEMORY_LEAKS.md</code> next to this component.
+  </p>
+
+  <button type="button" (click)="toggleChild()">
+    {{ showChild() ? 'Destroy child' : 'Mount child' }}
+  </button>
+  <p>Times mounted: {{ mountCount() }}</p>
+
+  @if (showChild()) {
+    <app-memory-leak-child />
+  } @else {
+    <p><em>Child unmounted — but its timers, subscription and listeners are still alive.</em></p>
+  }
+</section>

@@ -78,4 +78,10 @@ export const DASHBOARD_CARDS: DashboardCard[] = [
     icon: '📜',
     route: '/virtual-scroll',
   },
+  {
+    title: 'Memory Leak',
+    description: 'Mounts/unmounts a component with uncleared subscriptions, timers, and listeners.',
+    icon: '🧠',
+    route: '/memory-leak',
+  },
 ];

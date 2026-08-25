@@ -19,6 +19,7 @@ import { ApiMergeId } from './components/api-merge-id/api-merge-id';
 import { CachedApi } from './components/cached-api/cached-api';
 import { SequenceApiCall } from './components/sequence-api-call/sequence-api-call';
 import { UserFilter } from './components/user-filter/user-filter';
+import { VirtualScroll } from './components/virtual-scroll/virtual-scroll';
 export const routes: Routes = [
   // Add route top to bottom
   {
@@ -113,6 +114,11 @@ export const routes: Routes = [
     path: 'user-filter',
     component: UserFilter,
     title: 'User Filter',
+  },
+  {
+    path: 'virtual-scroll',
+    component: VirtualScroll,
+    title: 'virtual-Scroll',
   },
   {
     path: '**',

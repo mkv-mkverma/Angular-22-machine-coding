@@ -1,0 +1,6 @@
+<p>virtual-scroll works!</p>
+<cdk-virtual-scroll-viewport [itemSize]="50" style="height: 400px">
+  <div *cdkVirtualFor="let item of items; trackBy: trackById">
+    {{ item.name }}
+  </div>
+</cdk-virtual-scroll-viewport>

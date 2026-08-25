@@ -72,4 +72,10 @@ export const DASHBOARD_CARDS: DashboardCard[] = [
     icon: '🔍',
     route: '/user-filter',
   },
+  {
+    title: 'Virtual Scroll',
+    description: 'Renders only the visible rows of a large list for smooth scrolling.',
+    icon: '📜',
+    route: '/virtual-scroll',
+  },
 ];

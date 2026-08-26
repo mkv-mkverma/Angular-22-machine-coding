@@ -22,6 +22,7 @@ import { UserFilter } from './components/user-filter/user-filter';
 import { VirtualScroll } from './components/virtual-scroll/virtual-scroll';
 import { Rxresource } from './components/rxresource/rxresource';
 import { MemoryLeak } from './components/memory-leak/memory-leak';
+import { GlobalErrorComponent } from './components/global-error-component/global-error-component';
 export const routes: Routes = [
   // Add route top to bottom
   {
@@ -131,6 +132,11 @@ export const routes: Routes = [
     path: 'memory-leak',
     component: MemoryLeak,
     title: 'Memory Leak',
+  },
+  {
+    path: 'error-component',
+    component: GlobalErrorComponent,
+    title: 'Global Error Component',
   },
   {
     path: '**',

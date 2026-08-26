@@ -84,4 +84,10 @@ export const DASHBOARD_CARDS: DashboardCard[] = [
     icon: '🧠',
     route: '/memory-leak',
   },
+  {
+    title: 'Global Error Component',
+    description: 'Throws an uncaught runtime error to demonstrate the app-wide GlobalErrorHandler.',
+    icon: '🚨',
+    route: '/error-component',
+  },
 ];

@@ -15,4 +15,5 @@ export class Dashboard {
   dashboardData = this.route.snapshot.data['dashboardResolver'];
   message = this.route.snapshot.data['message'];
   readonly cards = DASHBOARD_CARDS;
+
 }

@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, ErrorHandler, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter, withComponentInputBinding, withRouterConfig } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -10,6 +10,7 @@ import { authInterceptor } from './core/interceptors/auth-interceptor';
 import { errorInterceptor } from './core/interceptors/error-interceptor';
 import { retryInterceptor } from './core/interceptors/retry-interceptor';
 import { loggingInterceptor } from './core/interceptors/logging-interceptor';
+import { GlobalErrorHandler } from './core/error/global-error-handler';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,6 +26,10 @@ export const appConfig: ApplicationConfig = {
       }),
     ),
     { provide: API_URL, useValue: environment.apiUrl },
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler,
+    },
     provideHttpClient(
       withInterceptors([
         ...(environment.production ? [] : [loggingInterceptor]),

@@ -1,0 +1,21 @@
+<p>reusable-component works!</p>
+
+<table>
+  <thead>
+    <tr>
+      @for (col of columns; track col.field) {
+        <th>{{ col.header }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (user of userData; track user.id) {
+      <tr (click)="save.emit(user)">
+        @for (col of columns; track col.field) {
+          <td>{{ user[col.field] }}</td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>
+<ng-content></ng-content>

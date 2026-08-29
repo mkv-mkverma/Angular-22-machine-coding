@@ -15,8 +15,9 @@ export class RetryWhen {
   user$ = this.getUser().pipe(
     retry({
       count: 3,
-      delay: (error, retryCount) => {
-        console.log(retryCount, error.status);
+      delay: (error) => {
+        // delay: (error, retryCount) => {
+        // console.log(retryCount, error.status);
         // ❌ 404 → don't retry
         if (error.status === 404) {
           return throwError(() => error);

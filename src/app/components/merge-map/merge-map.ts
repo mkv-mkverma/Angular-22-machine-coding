@@ -36,6 +36,9 @@ export class MergeMap {
 
   data = this.getUser()
     .pipe(
+      // `user.users` is an array; `from` converts it into an observable that
+      // emits each user individually, allowing the next `mergeMap` to call
+      // `getUserById` for every user.
       mergeMap((user) => from(user.users)),
       mergeMap((user) => this.getUserById(user.id).pipe(catchError(() => of([])))),
       toArray(),

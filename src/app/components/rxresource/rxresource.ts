@@ -28,6 +28,7 @@ interface ProductSearchResponse {
 export class Rxresource {
   private readonly http = inject(HttpClient);
   search = signal<string>('');
+  
   private readonly debouncedSearch = toSignal(
     toObservable(this.search).pipe(debounceTime(300), distinctUntilChanged()),
     { initialValue: this.search() },

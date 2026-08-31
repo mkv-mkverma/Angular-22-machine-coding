@@ -1,8 +1,9 @@
-import { Component, DestroyRef, inject, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Users } from './services/users';
+import { Component, inject, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Header } from './header/header/header';
 import { Footer } from './footer/footer/footer';
+import { GoogleAnalytics } from './core/analytics/google-analytics';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,17 @@ import { Footer } from './footer/footer/footer';
 })
 export class App {
   protected readonly title = signal('Angular-22-machine-coding');
-  private destroyRef = inject(DestroyRef);
-  private userService = inject(Users);
+
+  private router = inject(Router);
+  private analytics = inject(GoogleAnalytics);
+
+  constructor() {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.analytics.pageView(event.urlAfterRedirects);
+      });
+  }
 
   // user$ = this.userService.getUsers().subscribe()
   // If used outside an injection context, you can provide DestroyRef:

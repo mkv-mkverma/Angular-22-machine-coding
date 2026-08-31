@@ -30,6 +30,10 @@ export class Users {
     if (!this.user$) {
       // bufferSize: 1 retains the most recent API response for future subscribers.
       // Even if the component unsubscribes, refCount: false keeps the shared observable/cache alive in the service.
+      // share() shares the source among current subscribers but
+      // doesn't replay the previous value to late subscribers.
+      // shareReplay(1) shares the source and caches the latest emitted value, so a late subscriber can immediately receive it.
+
       this.user$ = this.getUsers().pipe(shareReplay({ bufferSize: 1, refCount: false }));
     }
     return this.user$;

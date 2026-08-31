@@ -1,5 +1,10 @@
 import { ApplicationConfig, ErrorHandler, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter, withComponentInputBinding, withRouterConfig } from '@angular/router';
+import {
+  provideRouter,
+  withComponentInputBinding,
+  withPreloading,
+  withRouterConfig,
+} from '@angular/router';
 
 import { routes } from './app.routes';
 import { API_URL } from './components/core/tokens/api-url.token';
@@ -11,6 +16,7 @@ import { errorInterceptor } from './core/interceptors/error-interceptor';
 import { retryInterceptor } from './core/interceptors/retry-interceptor';
 import { loggingInterceptor } from './core/interceptors/logging-interceptor';
 import { GlobalErrorHandler } from './core/error/global-error-handler';
+import { AppPreloadingStrategy } from './app-preloading-strategy';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +24,8 @@ export const appConfig: ApplicationConfig = {
     // maps route parameters, query parameters, and route data directly to component inputs
     provideRouter(
       routes,
+      // withPreloading(PreloadAllModules),
+      withPreloading(AppPreloadingStrategy),
       // input parent route
       withComponentInputBinding(),
       // input child route will work now

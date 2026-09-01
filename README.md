@@ -6,6 +6,9 @@ Angular 22 interview practice project.
 
 https://mkv-mkverma.github.io/Angular-22-machine-coding/
 
+## Sonar
+https://sonarcloud.io/summary/overall?id=mkv-mkverma_Angular-22-machine-coding&branch=main
+
 ## Topics Covered
 
 - RxJS

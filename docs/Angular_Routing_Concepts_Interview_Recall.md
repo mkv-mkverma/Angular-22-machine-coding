@@ -862,3 +862,154 @@ interviewer asks.
 
 Source basis: your uploaded routing/user-management interview material.
 fileciteturn1file0
+
+
+# Angular — Lazy Loading Services: Quick Review
+
+## 1. Provide service in a lazy route
+
+A service can be scoped to a lazy-loaded route by adding it to the route's `providers`.
+
+```ts
+@Injectable()
+export class TodoService {
+  constructor() {
+    console.log('TodoService created');
+  }
+}
+```
+
+```ts
+export const routes: Routes = [
+  {
+    path: 'todos',
+    loadComponent: () =>
+      import('./todos/todos.component')
+        .then(m => m.TodosComponent),
+
+    providers: [TodoService]
+  }
+];
+```
+
+The service belongs to the **`todos` route injector**.
+
+It is instantiated when something under that route actually injects it:
+
+```ts
+export class TodosComponent {
+  constructor(private todoService: TodoService) {}
+}
+```
+
+### Flow
+
+```text
+Application starts
+       ↓
+/home
+       ↓
+TodoService NOT created
+       ↓
+User navigates to /todos
+       ↓
+TodosComponent loads
+       ↓
+TodoService gets injected
+       ↓
+TodoService instance created
+```
+
+---
+
+## 2. Lazy-loaded feature with `loadChildren`
+
+```ts
+export const routes: Routes = [
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.routes')
+        .then(m => m.ADMIN_ROUTES)
+  }
+];
+```
+
+Inside `admin.routes.ts`:
+
+```ts
+export const ADMIN_ROUTES: Routes = [
+  {
+    path: '',
+    component: AdminComponent,
+    providers: [AdminService]
+  }
+];
+```
+
+`AdminService` is scoped to that lazy feature.
+
+---
+
+## 3. What about `providedIn: 'root'`?
+
+```ts
+@Injectable({
+  providedIn: 'root'
+})
+export class TodoService {}
+```
+
+This registers the service with the **root injector**.
+
+Important interview point:
+
+> `providedIn: 'root'` does NOT mean the service instance is created immediately when the application starts.
+
+Angular DI is lazy. The instance is generally created when something first requests it:
+
+```ts
+constructor(private todoService: TodoService) {}
+```
+
+So:
+
+```ts
+@Injectable({
+  providedIn: 'root'
+})
+export class TodoService {}
+```
+
+means:
+
+- Available application-wide
+- Normally a singleton
+- Instance is lazily created when first injected
+
+---
+
+## Interview Answer
+
+**Question: How do you lazy load a service in Angular?**
+
+> Angular services are lazy-instantiated by the dependency injection system. If I want a service to be scoped specifically to a lazy-loaded feature, I provide it in the lazy route or lazy-loaded component using `providers`. If I use `providedIn: 'root'`, the service is available application-wide and its instance is created when it's first injected rather than at application startup.
+
+---
+
+## Key Difference
+
+| Approach | Meaning |
+|---|---|
+| `providedIn: 'root'` | App-wide service, singleton, lazy instantiated |
+| `providers: [MyService]` on lazy route | Service scoped to that lazy route/feature |
+| `loadChildren()` | Lazy loads the feature code |
+| `loadComponent()` | Lazy loads the component code |
+
+### Remember
+
+**Lazy loading code ≠ lazy instantiation.**
+
+- `loadChildren()` / `loadComponent()` → controls when feature/component code is loaded.
+- Angular DI → controls when the service instance is created.
+- `providedIn: 'root'` → controls the service's injector scope.

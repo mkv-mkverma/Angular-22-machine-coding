@@ -52,6 +52,7 @@ export const routes: Routes = [
     path: 'exhaust-map',
     title: 'Exhaust Map',
     loadComponent: () => import('./components/exhaust-map/exhaust-map').then((c) => c.ExhaustMap),
+    // providers: [ServiceName] // lazy load service
   },
   {
     path: 'short-polling',

@@ -21,7 +21,7 @@ export class Login {
     this.authService.login(this.emailControl.value, this.passwordControl.value).subscribe({
       next: (response) => {
         console.log('Login successful:', response);
-        this.router.navigate(['/users']);
+        this.router.navigate(['/dashboard']);
       },
       error: (error) => {
         console.error('Login failed:', error);

@@ -90,4 +90,16 @@ export const DASHBOARD_CARDS: DashboardCard[] = [
     icon: '🚨',
     route: '/error-component',
   },
+  {
+    title: 'Reusable Table',
+    description: 'Generic table component driven by column config, with slotted row actions.',
+    icon: '📋',
+    route: '/reusable-table',
+  },
+  {
+    title: 'User Management',
+    description: 'Lists users with a lazy-loaded profile/add-user detail view alongside.',
+    icon: '🗂️',
+    route: '/user',
+  },
 ];

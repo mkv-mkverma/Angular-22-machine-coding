@@ -10,7 +10,7 @@ export const routes: Routes = [
   {
     path: '', // domain-name/
     pathMatch: 'full',
-    redirectTo: 'dashboard',
+    redirectTo: 'login',
   },
   {
     path: 'dashboard',
@@ -143,6 +143,14 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./components/global-error-component/global-error-component').then(
         (c) => c.GlobalErrorComponent,
+      ),
+  },
+  {
+    path: 'reusable-table',
+    title: 'Reusable Table',
+    loadComponent: () =>
+      import('./components/using-reusable-table/using-reusable-table').then(
+        (c) => c.UsingReusableTable,
       ),
   },
   {

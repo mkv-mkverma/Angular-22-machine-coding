@@ -36,7 +36,7 @@ describe('Login', () => {
     expect(component).toBeTruthy();
   });
 
-  it('login() calls Auth.login() with the form values and navigates to /users on success', () => {
+  it('login() calls Auth.login() with the form values and navigates to /dashboard on success', () => {
     const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
     mockAuth.login.mockReturnValue(of({ accessToken: 'a', refreshToken: 'b' }));
 
@@ -45,7 +45,7 @@ describe('Login', () => {
     component.login();
 
     expect(mockAuth.login).toHaveBeenCalledWith('manish@example.com', 'secret');
-    expect(navigateSpy).toHaveBeenCalledWith(['/users']);
+    expect(navigateSpy).toHaveBeenCalledWith(['/dashboard']);
   });
 
   it('login() logs the error and does not navigate when Auth.login() fails', () => {

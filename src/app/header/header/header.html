@@ -14,5 +14,15 @@
       >
       <a routerLink="autocomplete" routerLinkActive="active">Autocomplete</a>
     </nav>
+
+    @if (authService.isLoggedIn()) {
+      <a
+        class="avatar"
+        routerLink="/users"
+        routerLinkActive="active"
+        [attr.aria-label]="'Open user page for ' + authService.firstName() + ' ' + authService.lastName()"
+        >{{ authService.initials() }}</a
+      >
+    }
   </div>
 </header>

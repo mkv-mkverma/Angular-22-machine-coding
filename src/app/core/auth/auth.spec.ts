@@ -22,7 +22,7 @@ describe('Auth', () => {
     expect(service).toBeTruthy();
   });
 
-  it('login() posts credentials and stores the returned tokens', () => {
+  it('login() posts credentials and stores the returned tokens and name', () => {
     let result: { accessToken: string; refreshToken: string } | undefined;
     service.login('emilys', 'emilyspass').subscribe((r) => (result = r));
 
@@ -30,11 +30,24 @@ describe('Auth', () => {
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual({ username: 'emilys', password: 'emilyspass' });
 
-    req.flush({ accessToken: 'access-1', refreshToken: 'refresh-1' });
+    req.flush({
+      accessToken: 'access-1',
+      refreshToken: 'refresh-1',
+      firstName: 'Emily',
+      lastName: 'Smith',
+    });
 
-    expect(result).toEqual({ accessToken: 'access-1', refreshToken: 'refresh-1' });
+    expect(result).toEqual({
+      accessToken: 'access-1',
+      refreshToken: 'refresh-1',
+      firstName: 'Emily',
+      lastName: 'Smith',
+    });
     expect(service.getAccessToken()).toBe('access-1');
     expect(service.getRefreshToken()).toBe('refresh-1');
+    expect(service.firstName()).toBe('Emily');
+    expect(service.lastName()).toBe('Smith');
+    expect(service.initials()).toBe('ES');
   });
 
   it('refresh() posts the current refresh token and stores the new tokens on success', () => {
@@ -83,14 +96,18 @@ describe('Auth', () => {
     expect(service.getRefreshToken()).toBe('d');
   });
 
-  it('logout() clears both the access and refresh tokens', () => {
+  it('logout() clears the access token, refresh token, and name', () => {
     service.setAccessToken('access');
     service.setRefreshToken('refresh');
+    service.firstName.set('Emily');
+    service.lastName.set('Smith');
 
     service.logout();
 
     expect(service.getAccessToken()).toBe('');
     expect(service.getRefreshToken()).toBe('');
+    expect(service.firstName()).toBe('');
+    expect(service.lastName()).toBe('');
   });
 
   it('isLoggedIn() reflects whether an access token is currently set', () => {

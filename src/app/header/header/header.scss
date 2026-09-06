@@ -63,3 +63,25 @@ nav a.active {
   color: #dd0031;
   font-weight: 700;
 }
+
+.avatar {
+  display: grid;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border-radius: 50%;
+  background: #dd0031;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 150ms ease;
+}
+
+.avatar:hover,
+.avatar:focus-visible {
+  opacity: 0.85;
+  outline: 2px solid #dd0031;
+  outline-offset: 2px;
+}

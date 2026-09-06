@@ -1,5 +1,5 @@
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { inject, Service, signal } from '@angular/core';
+import { computed, inject, Service, signal } from '@angular/core';
 import { finalize, Observable, shareReplay, tap } from 'rxjs';
 import { SKIP_AUTH } from '../interceptors/tokens/skip-interceptor-interceptor';
 
@@ -16,13 +16,21 @@ export class Auth {
 
   accessToken = signal('');
   refreshToken = signal('');
+  firstName = signal('');
+  lastName = signal('');
+  initials = computed(() => `${this.firstName().charAt(0)}${this.lastName().charAt(0)}`.toUpperCase());
 
   private refreshInProgress$: Observable<{ accessToken: string; refreshToken: string }> | null =
     null;
 
   login(username: string, password: string) {
     return this.http
-      .post<{ accessToken: string; refreshToken: string }>(
+      .post<{
+        accessToken: string;
+        refreshToken: string;
+        firstName: string;
+        lastName: string;
+      }>(
         'https://dummyjson.com/auth/login',
         {
           username,
@@ -43,6 +51,8 @@ export class Auth {
         tap((response) => {
           this.setAccessToken(response.accessToken);
           this.setRefreshToken(response.refreshToken);
+          this.firstName.set(response.firstName);
+          this.lastName.set(response.lastName);
 
           // any JS running on the page — including injected XSS payloads.
           // localStorage nor plain in-memory:
@@ -79,6 +89,8 @@ export class Auth {
   logout() {
     this.accessToken.set('');
     this.refreshToken.set('');
+    this.firstName.set('');
+    this.lastName.set('');
     // localStorage.removeItem('accessToken');
     // localStorage.removeItem('refreshToken');
   }

@@ -223,4 +223,73 @@ I also encourage coding standards, unit testing, documentation, and knowledge-sh
 
 My goal is not to solve every problem for the developer, but to help them become more confident and independent.
 
+17. API response suddenly become slow
 
+If an API suddenly becomes slow, I would first understand the impact and check whether the issue is happening for all users or only for specific APIs or requests.
+
+I would compare the current response time with the normal baseline and check monitoring, logs, and recent deployments.
+
+Then I would identify where the delay is happening — frontend, network, API server, database, or a downstream service.
+
+For example, I would check:
+
+- API response time and server logs
+- Recent code or configuration changes
+- Database query performance
+- CPU and memory usage
+- Traffic/load increase
+- Downstream API dependencies
+
+If it is a production issue, I would prioritize restoring performance. If a recent deployment caused it, I would consider rollback while the team investigates the root cause.
+
+After identifying the root cause, I would implement the permanent fix and add monitoring/alerts so we can detect the problem earlier in the future.
+
+My approach is **identify the bottleneck → mitigate the impact → find the root cause → fix → prevent recurrence.**
+
+18. App crash only in safari
+
+First I reproduce it in Safari and check the stack trace. Then I compare Safari with Chrome to identify the browser-specific API, library, CSS, or JavaScript issue. I fix it, test across supported browsers, and add regression coverage.
+
+If they ask "What if you cannot reproduce it?", say:
+
+I would collect the user's Safari version, OS, steps to reproduce, console errors and crash information, and use monitoring or session logs to identify the pattern.
+
+19. Login Works for some uses but not for others
+
+If login works for some users but not others, I would first identify what is different between the working and failing users.
+
+I would check the browser, environment, user role, account status, authentication method, and whether the issue is happening consistently.
+
+Then I would check the frontend console, network request, API response, authentication logs, and backend logs to identify where the failure is happening.
+
+For example, if the API returns `401`, I would investigate authentication or token-related issues. If it returns `403`, I would check authorization or user permissions. If the API succeeds but the UI fails, I would investigate the frontend.
+
+I would also check whether there was any recent deployment or configuration change.
+
+Once I identify the root cause, I would fix the issue, test with both affected and working user types, and add appropriate test coverage.
+
+My approach is **compare → isolate the difference → identify the failing layer → fix → test.**
+
+20. App is slow after deployment
+
+If the application becomes slow immediately after a deployment, I would first check whether the slowdown started exactly after the release and compare the new version with the previous version.
+
+I would check browser performance, API response times, network requests, bundle size, memory usage, and any recent frontend changes.
+
+If the impact is high and the previous version was working correctly, I would consider rolling back to restore performance while the team investigates.
+
+Then I would identify the root cause, fix it, test the fix, and monitor the application after redeployment.
+
+21. Release fails
+
+If a release fails, I would first identify where the failure happened — build, deployment, infrastructure, configuration, or application startup.
+
+I would check the CI/CD pipeline logs and the exact error message instead of immediately making changes.
+
+If it is a production release and the previous version is stable, I would rollback to the last known good version to minimize the impact.
+
+Then I would fix the root cause, run the required tests, and redeploy.
+
+After the release is successful, I would document the issue and improve the release process so the same failure is caught earlier, for example through better automated checks or deployment validation.
+
+My approach is **identify → stabilize → fix → validate → improve the process.**

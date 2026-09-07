@@ -293,3 +293,38 @@ Then I would fix the root cause, run the required tests, and redeploy.
 After the release is successful, I would document the issue and improve the release process so the same failure is caught earlier, for example through better automated checks or deployment validation.
 
 My approach is **identify → stabilize → fix → validate → improve the process.**
+
+22. How would design reusable comp lib
+
+I would first identify the common UI patterns used across the application, such as buttons, inputs, dropdowns, tables, modals, and form controls.
+
+Then I would create a separate Angular component library with reusable, configurable components. I would keep the components generic and expose clear `@Input()` or signal-based inputs and outputs/events instead of putting business logic inside the components.
+
+For example, a reusable button should handle things like label, disabled state, loading state, and variant, while the business logic remains in the consuming application.
+
+I would also define consistent theming, accessibility, documentation, unit tests, and versioning for the library.
+
+Before creating a new component, I would check whether an existing component can be extended or configured instead of creating duplicate components.
+
+I would publish the library through our internal package repository and follow semantic versioning so consuming applications can upgrade safely.
+
+My goal would be **reusable UI + consistent design + good developer experience without coupling the library to business-specific logic.**
+
+23. when would you use MFE over liburary
+
+I would use a **component library** when multiple applications need to share common UI components, utilities, or design patterns, and they can follow the same release and deployment process.
+
+I would choose **Micro Frontends (MFE)** when different teams or business domains need to develop and deploy their parts of the application independently.
+
+For example, if we have an e-commerce platform:
+
+- **Component library:** Common Button, Input, Modal, Table, Header, and design system shared across applications.
+- **MFE:** Separate teams independently owning Checkout, Orders, and Product Catalog, with their own development and deployment lifecycle.
+
+So my decision would be:
+
+**Need code reuse → Library**
+
+**Need independent team ownership and deployment → MFE**
+
+I would not introduce MFE just because the application is large. It also adds complexity around routing, communication, shared dependencies, authentication, versioning, and deployment.

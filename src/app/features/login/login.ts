@@ -26,6 +26,7 @@ export class Login {
       error: (error) => {
         console.error('Login failed:', error);
       },
+      complete: () => console.log('completed'),
     });
   }
   logout() {

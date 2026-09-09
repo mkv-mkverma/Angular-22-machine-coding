@@ -1,8 +1,5 @@
 # Auth Flow — Quick Revision
 
-One-pager for talking through login → interceptors → token refresh out loud in an interview.
-For exhaustive detail see `interceptor-cheat-sheet.md`; this file is the short version to skim right before you walk in.
-
 ## The story in one sentence
 
 Login gets you two tokens; every request after that gets the access token stapled on automatically; if the server says the access token is stale, one shared refresh call fixes it and retries — everything else waits its turn instead of also refreshing.

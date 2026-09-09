@@ -12,6 +12,8 @@
     "ci:test": "ng test --no-watch --no-progress --coverage",
     "mock-api": "json-server src/assets/db.json",
     "analyze": "source-map-explorer \"dist/Angular-22-machine-coding/browser/*.js\" --no-border-checks",
+    "build:sourcemap": "ng build --source-map",
+    "memory-leak":"npx http-server dist/Angular-22-machine-coding/browser",
     "prepare": "husky",
     "lint": "ng lint"
   },

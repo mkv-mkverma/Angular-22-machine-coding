@@ -102,4 +102,10 @@ export const DASHBOARD_CARDS: DashboardCard[] = [
     icon: '🗂️',
     route: '/user',
   },
+  {
+    title: 'Emit One Sec',
+    description: 'Types out a search string one character per second using switchMap/concatMap.',
+    icon: '⏱️',
+    route: '/emit-one-sec',
+  },
 ];

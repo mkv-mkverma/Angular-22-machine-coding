@@ -328,3 +328,25 @@ So my decision would be:
 **Need independent team ownership and deployment → MFE**
 
 I would not introduce MFE just because the application is large. It also adds complexity around routing, communication, shared dependencies, authentication, versioning, and deployment.
+
+24. Can you communicate with business/product teams?
+
+Yes, definitely. I regularly communicate with product and business teams to understand the actual business requirement, clarify ambiguities, and explain technical constraints. I don't just take a ticket and start coding. If something is unclear, I discuss the expected business behavior, edge cases, and acceptance criteria with the product team before implementation.
+
+For example, if the requirement is ‘only admins can delete an order,’ I would clarify who qualifies as an admin, whether the restriction is tenant-specific, what should happen for unauthorized users, and whether the API also enforces the permission. Then I would translate that requirement into the frontend implementation and coordinate with the backend team if the API contract needs changes.
+
+Business requirement
+↓
+Clarify requirement
+↓
+Identify technical impact
+↓
+Give 2–3 options
+↓
+Discuss effort / risk / UX
+↓
+Agree on approach
+↓
+Implement
+↓
+Demo / validate

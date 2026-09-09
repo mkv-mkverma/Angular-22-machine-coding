@@ -47,12 +47,12 @@ export const routes: Routes = [
     data: {
       preload: true,
     },
+    // providers: [ServiceName] // lazy load service
   },
   {
     path: 'exhaust-map',
     title: 'Exhaust Map',
     loadComponent: () => import('./components/exhaust-map/exhaust-map').then((c) => c.ExhaustMap),
-    // providers: [ServiceName] // lazy load service
   },
   {
     path: 'short-polling',
@@ -152,6 +152,12 @@ export const routes: Routes = [
       import('./components/using-reusable-table/using-reusable-table').then(
         (c) => c.UsingReusableTable,
       ),
+  },
+  {
+    path: 'emit-one-sec',
+    title: 'Emit One Sec',
+    loadComponent: () =>
+      import('./components/emit-one-sec/emit-one-sec').then((c) => c.EmitOneSec),
   },
   {
     path: '**',

@@ -10,7 +10,13 @@
   </thead>
   <tbody>
     @for (user of userData; track user.id) {
-      <tr (click)="save.emit(user)">
+      <tr
+        role="button"
+        tabindex="0"
+        (click)="save.emit(user)"
+        (keydown.enter)="save.emit(user)"
+        (keydown.space)="$event.preventDefault(); save.emit(user)"
+      >
         @for (col of columns; track col.field) {
           <td>{{ user[col.field] }}</td>
         }

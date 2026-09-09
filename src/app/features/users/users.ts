@@ -18,9 +18,9 @@ export interface IUserMe {
   styleUrl: './users.scss',
 })
 export class Users {
-  private auth = inject(Auth);
-  private router = inject(Router);
-  private http = inject(HttpClient);
+  private readonly auth = inject(Auth);
+  private readonly router = inject(Router);
+  private readonly http = inject(HttpClient);
 
   constructor() {
     // TEMP: lets us corrupt the token from DevTools console. Remove once Phase 4/5 testing is done.

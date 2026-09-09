@@ -9,7 +9,7 @@ import { retry, throwError, timer } from 'rxjs';
   styleUrl: './retry-when.scss',
 })
 export class RetryWhen {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   // user$ = this.getUser().pipe(retry({count:1, delay:1000}));
   user$ = this.getUser().pipe(

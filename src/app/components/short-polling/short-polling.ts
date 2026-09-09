@@ -16,8 +16,8 @@ interface User {
   styleUrl: './short-polling.scss',
 })
 export class ShortPolling {
-  private http = inject(HttpClient);
-  private apiUrl = inject(API_URL);
+  private readonly http = inject(HttpClient);
+  private readonly apiUrl = inject(API_URL);
 
   // timer(0, 10000) emits immediately and then every 10 seconds.
   // switchMap takes each emission and triggers the API call.

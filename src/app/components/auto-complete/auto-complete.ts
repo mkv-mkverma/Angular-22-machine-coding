@@ -21,7 +21,7 @@ interface ProductSearchResponse {
   styleUrl: './auto-complete.scss',
 })
 export class AutoComplete {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   searchControl = new FormControl('', { nonNullable: true });
 

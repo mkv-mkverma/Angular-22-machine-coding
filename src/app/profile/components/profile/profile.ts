@@ -12,8 +12,8 @@ import { distinctUntilChanged, filter, map, switchMap } from 'rxjs';
 })
 export class Profile {
   // ActivatedRoute.params gives you the route parameters from the current URL as Observable that emits route parameters whenever the route parameters change, allowing the component to react without being recreated.
-  private route = inject(ActivatedRoute);
-  private profileService = inject(ProfileService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly profileService = inject(ProfileService);
 
   user$ = this.route.paramMap.pipe(
     map((param) => param.get('id')),

@@ -10,7 +10,7 @@ import { UserManagementService } from '../service/user-management';
   styleUrl: './user.scss',
 })
 export class User {
-  private userManagementService = inject(UserManagementService);
+  private readonly userManagementService = inject(UserManagementService);
   user = input.required<IUsers>();
 
   

@@ -24,7 +24,7 @@ interface TodosResponse {
   styleUrl: './todos.scss',
 })
 export class Todos {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   todos = toSignal(this.getTodos().pipe(map((response) => response.todos)), { initialValue: [] });
 

@@ -9,12 +9,14 @@ code**.
 
 It looks at your source code and tells you things such as:
 
--   🐛 Possible bugs
--   🧹 Code smells
--   🔐 Security problems
--   🧪 Test coverage
--   📋 Duplicate code
--   📖 Maintainability problems
+- 🔍 Bugs — detects code that may behave incorrectly.
+- 🧹 Code smells — maintainability/readability issues.
+- 🔐 Security — identifies security vulnerabilities/hotspots.
+- 🧪 Test coverage — imports LCOV/Jest/Karma coverage reports.
+- 📋 Duplications — detects duplicated code.
+- ♻️ Maintainability — helps reduce technical debt.
+- 🚦 Quality Gate — defines pass/fail conditions before merging/deploying.
+- 📊 Trends — tracks quality over time.
 
 The goal is not simply to make the code "work".
 
@@ -22,7 +24,7 @@ The goal is to make the code:
 
 > **Correct + Secure + Easy to understand + Easy to maintain**
 
-------------------------------------------------------------------------
+---
 
 # 2. What is a Code Smell?
 
@@ -33,7 +35,7 @@ It is usually **not an actual bug**.
 
 ### Simple example
 
-``` ts
+```ts
 function calculate(a: number, b: number, c: number, d: number, e: number) {
   // lots of complicated logic
 }
@@ -46,7 +48,7 @@ SonarCloud may report this as a **code smell**.
 
 Another example:
 
-``` ts
+```ts
 if (user) {
   if (user.address) {
     if (user.address.city) {
@@ -62,15 +64,17 @@ SonarCloud helps developers identify these patterns.
 
 ### Important distinction
 
-  Finding         Simple meaning
-  --------------- -------------------------------------------
-  Bug             The code may behave incorrectly
-  Vulnerability   Security weakness that could be exploited
-  Code Smell      Code that is difficult/risky to maintain
-  Coverage        How much code is tested
-  Duplication     Similar/repeated code
+Finding Simple meaning
 
-------------------------------------------------------------------------
+---
+
+Bug The code may behave incorrectly
+Vulnerability Security weakness that could be exploited
+Code Smell Code that is difficult/risky to maintain
+Coverage How much code is tested
+Duplication Similar/repeated code
+
+---
 
 # 3. Why does SonarCloud help with Code Quality?
 
@@ -80,7 +84,7 @@ Everyone writes code differently.
 
 Without an automated quality check:
 
-``` text
+```text
 Developer
    ↓
 Writes code
@@ -94,7 +98,7 @@ Merge
 
 With SonarCloud:
 
-``` text
+```text
 Developer
    ↓
 Writes code
@@ -115,7 +119,7 @@ This gives the team a **consistent automated quality check**.
 It is especially useful in CI/CD because every pull request can be
 checked automatically.
 
-------------------------------------------------------------------------
+---
 
 # 4. What SonarCloud checks
 
@@ -127,7 +131,7 @@ Looks for security-related problems.
 
 Example:
 
-``` ts
+```ts
 element.innerHTML = userInput;
 ```
 
@@ -139,7 +143,7 @@ Your current project shows:
 
 That is good.
 
-------------------------------------------------------------------------
+---
 
 ## Reliability
 
@@ -153,7 +157,7 @@ Your project currently shows:
 This means SonarCloud has identified 11 reliability-related issues that
 you should review.
 
-------------------------------------------------------------------------
+---
 
 ## Maintainability
 
@@ -172,12 +176,12 @@ findings.
 
 So don't confuse:
 
-``` text
+```text
 A = rating
 61 = number of issues
 ```
 
-------------------------------------------------------------------------
+---
 
 # 5. Code Coverage
 
@@ -191,7 +195,7 @@ Your project currently has:
 
 For example:
 
-``` ts
+```ts
 function add(a: number, b: number) {
   return a + b;
 }
@@ -199,7 +203,7 @@ function add(a: number, b: number) {
 
 If your test does:
 
-``` ts
+```ts
 expect(add(2, 3)).toBe(5);
 ```
 
@@ -214,7 +218,7 @@ But:
 
 Good tests matter more than simply chasing a percentage.
 
-------------------------------------------------------------------------
+---
 
 # 6. Duplication
 
@@ -222,7 +226,7 @@ Duplication means similar code exists in multiple places.
 
 Example:
 
-``` ts
+```ts
 function getUser() {
   // same logic
 }
@@ -241,13 +245,13 @@ Your project currently shows:
 
 That is the percentage of duplicated code detected by SonarCloud.
 
-------------------------------------------------------------------------
+---
 
 # 7. Understanding your `sonar-project.properties`
 
 Your file:
 
-``` properties
+```properties
 sonar.projectKey=mkv-mkverma_Angular-22-machine-coding
 sonar.projectName=Angular-22-machine-coding
 sonar.organization=mkv-mkverma
@@ -265,11 +269,11 @@ sonar.javascript.lcov.reportPaths=coverage/Angular-22-machine-coding/lcov.info
 
 Let's understand each line simply.
 
-------------------------------------------------------------------------
+---
 
 ## `sonar.projectKey`
 
-``` properties
+```properties
 sonar.projectKey=mkv-mkverma_Angular-22-machine-coding
 ```
 
@@ -277,7 +281,7 @@ This is the **unique ID of your SonarCloud project**.
 
 Think:
 
-``` text
+```text
 SonarCloud
    ↓
 Which project?
@@ -285,21 +289,21 @@ Which project?
 mkv-mkverma_Angular-22-machine-coding
 ```
 
-------------------------------------------------------------------------
+---
 
 ## `sonar.projectName`
 
-``` properties
+```properties
 sonar.projectName=Angular-22-machine-coding
 ```
 
 This is the **display name** of your project in SonarCloud.
 
-------------------------------------------------------------------------
+---
 
 ## `sonar.organization`
 
-``` properties
+```properties
 sonar.organization=mkv-mkverma
 ```
 
@@ -307,11 +311,11 @@ This tells SonarCloud:
 
 > Which organization owns this project?
 
-------------------------------------------------------------------------
+---
 
 ## `sonar.sourceEncoding`
 
-``` properties
+```properties
 sonar.sourceEncoding=UTF-8
 ```
 
@@ -319,7 +323,7 @@ This tells SonarCloud that the source files use UTF-8 encoding.
 
 For example, it allows source code containing characters such as:
 
-``` text
+```text
 ₹
 é
 中文
@@ -327,11 +331,11 @@ For example, it allows source code containing characters such as:
 
 to be interpreted correctly.
 
-------------------------------------------------------------------------
+---
 
 # 8. `sonar.sources`
 
-``` properties
+```properties
 sonar.sources=src
 ```
 
@@ -341,11 +345,11 @@ This tells SonarCloud:
 
 For an Angular application, that usually means your application code.
 
-------------------------------------------------------------------------
+---
 
 # 9. `sonar.exclusions`
 
-``` properties
+```properties
 sonar.exclusions=**/node_modules/**,**/*.spec.ts
 ```
 
@@ -357,7 +361,7 @@ You are excluding:
 
 ### `node_modules`
 
-``` text
+```text
 **/node_modules/**
 ```
 
@@ -366,22 +370,22 @@ code.
 
 ### Test files
 
-``` text
+```text
 **/*.spec.ts
 ```
 
 Because test files are handled separately using:
 
-``` properties
+```properties
 sonar.tests=src
 sonar.test.inclusions=**/*.spec.ts
 ```
 
-------------------------------------------------------------------------
+---
 
 # 10. `sonar.tests`
 
-``` properties
+```properties
 sonar.tests=src
 ```
 
@@ -389,11 +393,11 @@ This tells SonarCloud:
 
 > Tests are located inside the `src` folder.
 
-------------------------------------------------------------------------
+---
 
 # 11. `sonar.test.inclusions`
 
-``` properties
+```properties
 sonar.test.inclusions=**/*.spec.ts
 ```
 
@@ -403,18 +407,18 @@ This tells SonarCloud:
 
 For example:
 
-``` text
+```text
 src/app/app.component.spec.ts
 src/app/services/user.service.spec.ts
 ```
 
 are recognized as tests.
 
-------------------------------------------------------------------------
+---
 
 # 12. LCOV coverage report
 
-``` properties
+```properties
 sonar.javascript.lcov.reportPaths=coverage/Angular-22-machine-coding/lcov.info
 ```
 
@@ -422,7 +426,7 @@ This is very important.
 
 Your test command generates a coverage report:
 
-``` text
+```text
 npm run test:coverage
         ↓
 coverage/
@@ -434,7 +438,7 @@ SonarCloud reads that `lcov.info` file to understand your test coverage.
 
 The flow is:
 
-``` text
+```text
 Angular tests
      ↓
 Coverage generated
@@ -448,17 +452,17 @@ Coverage shown in SonarCloud
 
 That is why your SonarCloud page can show:
 
-``` text
+```text
 94.7% Coverage
 ```
 
-------------------------------------------------------------------------
+---
 
 # 13. Understanding your GitHub Actions workflow
 
 Your workflow:
 
-``` yaml
+```yaml
 name: SonarCloud Scan
 
 on:
@@ -499,13 +503,13 @@ jobs:
 
 Think of it as an automated pipeline.
 
-------------------------------------------------------------------------
+---
 
 # 14. Pipeline flow
 
 Your pipeline basically does this:
 
-``` text
+```text
 GitHub
    │
    ├── Code pushed to main
@@ -543,11 +547,11 @@ GitHub
              └── Duplication
 ```
 
-------------------------------------------------------------------------
+---
 
 # 15. Why `fetch-depth: 0`?
 
-``` yaml
+```yaml
 with:
   fetch-depth: 0
 ```
@@ -563,11 +567,11 @@ For an interview, you can simply say:
 > "`fetch-depth: 0` gives SonarCloud access to the complete Git history,
 > which helps with SCM and pull-request analysis."
 
-------------------------------------------------------------------------
+---
 
 # 16. Why `npm ci`?
 
-``` yaml
+```yaml
 run: npm ci
 ```
 
@@ -578,7 +582,7 @@ installation.
 
 Simple explanation:
 
-``` text
+```text
 package-lock.json
        ↓
      npm ci
@@ -586,11 +590,11 @@ package-lock.json
 Same dependency versions
 ```
 
-------------------------------------------------------------------------
+---
 
 # 17. Why run tests before SonarCloud?
 
-``` yaml
+```yaml
 - name: Run tests with coverage
   run: npm run test:coverage
 ```
@@ -599,7 +603,7 @@ Because SonarCloud needs the coverage report.
 
 The important sequence is:
 
-``` text
+```text
 Run tests
    ↓
 Generate coverage
@@ -612,11 +616,11 @@ SonarCloud reads lcov.info
 If the coverage file is not generated, SonarCloud cannot use that
 report.
 
-------------------------------------------------------------------------
+---
 
 # 18. What are `GITHUB_TOKEN` and `SONAR_TOKEN`?
 
-``` yaml
+```yaml
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -639,21 +643,21 @@ inside your source code.
 
 Never commit the actual token into Git.
 
-------------------------------------------------------------------------
+---
 
 # 19. What happens when I create a Pull Request?
 
 Suppose you change:
 
-``` ts
-user.service.ts
+```ts
+user.service.ts;
 ```
 
 and create a PR.
 
 GitHub Actions runs:
 
-``` text
+```text
 PR
  ↓
 Install dependencies
@@ -671,7 +675,7 @@ Now the team can review quality problems **before merging the code**.
 
 This is one of the biggest benefits of SonarCloud.
 
-------------------------------------------------------------------------
+---
 
 # 20. What is a Quality Gate?
 
@@ -681,7 +685,7 @@ A **Quality Gate** is basically a set of rules that determines:
 
 For example, a team could define rules such as:
 
-``` text
+```text
 New code coverage >= 80%
 No new critical bugs
 No new vulnerabilities
@@ -690,7 +694,7 @@ Limited duplication
 
 Then:
 
-``` text
+```text
 Code
  ↓
 SonarCloud analysis
@@ -704,13 +708,13 @@ This can be used in a CI/CD process to prevent poor-quality code from
 being merged or released, depending on how the team configures the
 pipeline.
 
-------------------------------------------------------------------------
+---
 
 # 21. Simple real-world example
 
 Imagine a developer writes:
 
-``` ts
+```ts
 if (user) {
   if (user.profile) {
     if (user.profile.address) {
@@ -730,19 +734,19 @@ But SonarCloud may say:
 
 The developer can refactor it:
 
-``` ts
+```ts
 return user?.profile?.address?.city;
 ```
 
 Now the code is:
 
--   Easier to read
--   Shorter
--   Easier to maintain
+- Easier to read
+- Shorter
+- Easier to maintain
 
 This is the type of improvement SonarCloud encourages.
 
-------------------------------------------------------------------------
+---
 
 # 22. SonarCloud does NOT replace code review
 
@@ -753,7 +757,7 @@ developer does.
 
 A good process is:
 
-``` text
+```text
 Developer
    ↓
 Writes code
@@ -772,22 +776,24 @@ Think of SonarCloud as:
 > **An automated code-quality assistant, not a replacement for
 > developers.**
 
-------------------------------------------------------------------------
+---
 
 # 23. Your current project
 
 From your current SonarCloud dashboard:
 
-  Metric                     Current result
-  ------------------------ ----------------
-  Security                                A
-  Security issues                         0
-  Reliability                             C
-  Reliability issues                     11
-  Maintainability                         A
-  Maintainability issues                 61
-  Coverage                            94.7%
-  Duplication                          2.8%
+Metric Current result
+
+---
+
+Security A
+Security issues 0
+Reliability C
+Reliability issues 11
+Maintainability A
+Maintainability issues 61
+Coverage 94.7%
+Duplication 2.8%
 
 The next useful step is **not blindly fixing all 72 issues**.
 
@@ -802,7 +808,7 @@ Instead:
 
 That is how you will actually learn SonarCloud.
 
-------------------------------------------------------------------------
+---
 
 # 24. Interview explanation
 
@@ -840,7 +846,7 @@ Say:
 > code-quality, reliability, maintainability and security issues,
 > especially as part of CI/CD and pull-request checks."
 
-------------------------------------------------------------------------
+---
 
 # 25. The most important thing to remember
 
@@ -848,7 +854,7 @@ You don't need to memorize SonarCloud.
 
 Remember this:
 
-``` text
+```text
 SonarCloud
     ↓
 Analyzes code
@@ -868,7 +874,7 @@ Better maintainable code
 
 And your GitHub Actions does:
 
-``` text
+```text
 Code
  ↓
 npm ci

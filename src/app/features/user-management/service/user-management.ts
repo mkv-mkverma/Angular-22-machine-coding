@@ -4,7 +4,7 @@ import { IUsers, UsersResponse } from '../models/usersManagement';
 
 @Service()
 export class UserManagementService {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   getUsers() {
     return this.http.get<UsersResponse>(`https://dummyjson.com/users`);

@@ -9,7 +9,7 @@ import { retry } from 'rxjs';
   styleUrl: './retry.scss',
 })
 export class Retry {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   user$ = this.getUser()
     // retry(n) resubscribes to the Observable when an error occurs, up to n times.

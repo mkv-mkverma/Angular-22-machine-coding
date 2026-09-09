@@ -18,7 +18,7 @@ interface UsersResponse {
   styleUrl: './merge-map.scss',
 })
 export class MergeMap {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   getUser() {
     return this.http.get<UsersResponse>('https://dummyjson.com/users');

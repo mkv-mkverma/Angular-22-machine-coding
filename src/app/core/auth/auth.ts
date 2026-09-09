@@ -12,13 +12,15 @@ export class Auth {
   // POST https://dummyjson.com/auth/refresh
   // Body:  { refreshToken }
   // Response: { accessToken, refreshToken }
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   accessToken = signal('');
   refreshToken = signal('');
   firstName = signal('');
   lastName = signal('');
-  initials = computed(() => `${this.firstName().charAt(0)}${this.lastName().charAt(0)}`.toUpperCase());
+  initials = computed(() =>
+    `${this.firstName().charAt(0)}${this.lastName().charAt(0)}`.toUpperCase(),
+  );
 
   private refreshInProgress$: Observable<{ accessToken: string; refreshToken: string }> | null =
     null;
@@ -65,24 +67,23 @@ export class Auth {
   }
 
   refresh() {
-    if (!this.refreshInProgress$) {
-      this.refreshInProgress$ = this.http
-        .post<{ accessToken: string; refreshToken: string }>(
-          `https://dummyjson.com/auth/refresh`,
-          { refreshToken: this.refreshToken() },
-          { context: new HttpContext().set(SKIP_AUTH, true) },
-        )
-        .pipe(
-          tap((response) => {
-            this.setAccessToken(response.accessToken);
-            this.setRefreshToken(response.refreshToken);
-          }),
-          shareReplay(1),
-          // finalize is an RxJS operator that runs a callback when the observable completes, errors, or is unsubscribed
-          // always runs — success, error, or cancel for cleanup
-          finalize(() => (this.refreshInProgress$ = null)),
-        );
-    }
+    // if (!this.refreshInProgress$) {this.http.....}
+    this.refreshInProgress$ ??= this.http
+      .post<{ accessToken: string; refreshToken: string }>(
+        `https://dummyjson.com/auth/refresh`,
+        { refreshToken: this.refreshToken() },
+        { context: new HttpContext().set(SKIP_AUTH, true) },
+      )
+      .pipe(
+        tap((response) => {
+          this.setAccessToken(response.accessToken);
+          this.setRefreshToken(response.refreshToken);
+        }),
+        shareReplay(1),
+        // finalize is an RxJS operator that runs a callback when the observable completes, errors, or is unsubscribed
+        // always runs — success, error, or cancel for cleanup
+        finalize(() => (this.refreshInProgress$ = null)),
+      );
     return this.refreshInProgress$;
   }
 

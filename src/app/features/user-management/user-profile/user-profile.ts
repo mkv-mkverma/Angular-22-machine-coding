@@ -12,7 +12,7 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './user-profile.scss',
 })
 export class UserProfile implements OnInit {
-  private userManagementService = inject(UserManagementService);
+  private readonly userManagementService = inject(UserManagementService);
 
   // userId should be same as path: 'user/:userId',
   // this userId coming from url
@@ -25,8 +25,8 @@ export class UserProfile implements OnInit {
   userName = computed(() => `${this.user()?.firstName} ${this.user()?.lastName}`);
 
   // Alternative way
-  private destroyRef = inject(DestroyRef);
-  private activatedRoute = inject(ActivatedRoute);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly activatedRoute = inject(ActivatedRoute);
   public firstName!: Observable<string>;
 
   ngOnInit() {

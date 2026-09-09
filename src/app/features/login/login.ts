@@ -10,8 +10,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './login.scss',
 })
 export class Login {
-  private authService = inject(Auth);
-  private router = inject(Router);
+  private readonly authService = inject(Auth);
+  private readonly router = inject(Router);
 
   emailControl = new FormControl('', { nonNullable: true });
   passwordControl = new FormControl('', { nonNullable: true });

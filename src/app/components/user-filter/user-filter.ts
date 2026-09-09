@@ -33,7 +33,7 @@ interface UserResponse {
   styleUrl: './user-filter.scss',
 })
 export class UserFilter {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   // form control
   searchControl = new FormControl('');

@@ -12,16 +12,16 @@ import { RouterOutlet, RouterLinkWithHref, RouterLink, ActivatedRoute } from '@a
   styleUrl: './user-management.scss',
 })
 export class UserManagement implements OnInit {
-  order = input<'asc' | 'desc'>();
-  private userManagementService = inject(UserManagementService);
+  readonly order = input<'asc' | 'desc'>();
+  private readonly userManagementService = inject(UserManagementService);
 
-  private allUsers = toSignal(
+  private readonly allUsers = toSignal(
     this.userManagementService.getUsers().pipe(map((response) => response.users)),
     { initialValue: [] },
   );
 
   // ids removed locally after a successful delete, since allUsers() itself is read-only
-  private deletedIds = signal<number[]>([]);
+  private readonly deletedIds = signal<number[]>([]);
 
   users = computed(() => this.allUsers().filter((user) => !this.deletedIds().includes(user.id)));
 

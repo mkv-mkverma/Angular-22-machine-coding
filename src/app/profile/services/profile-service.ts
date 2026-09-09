@@ -5,7 +5,7 @@ import { IUser } from '../models/user';
 
 @Service()
 export class ProfileService {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   private readonly cache = new Map<number, Observable<IUser>>();
 

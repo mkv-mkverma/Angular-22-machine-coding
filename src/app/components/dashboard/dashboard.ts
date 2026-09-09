@@ -9,7 +9,7 @@ import { DASHBOARD_CARDS } from './dashboard.constant';
   styleUrl: './dashboard.scss',
 })
 export class Dashboard {
-  private route = inject(ActivatedRoute);
+  private readonly route = inject(ActivatedRoute);
 
   dashboardData = this.route.snapshot.data['dashboardResolver'];
   message = this.route.snapshot.data['message'];

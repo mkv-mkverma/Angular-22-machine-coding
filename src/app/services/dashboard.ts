@@ -3,7 +3,7 @@ import { inject, Service } from '@angular/core';
 
 @Service()
 export class Dashboard {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   getUsers(id = 1) {
     return this.http.get<unknown[]>(`https://jsonplaceholder.typicode.com/users/${id}`);

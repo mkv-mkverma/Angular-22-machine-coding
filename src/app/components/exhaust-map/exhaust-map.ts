@@ -10,7 +10,7 @@ import { exhaustMap, Subject } from 'rxjs';
   styleUrl: './exhaust-map.scss',
 })
 export class ExhaustMap {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   loginClicks$ = new Subject<number>();
 

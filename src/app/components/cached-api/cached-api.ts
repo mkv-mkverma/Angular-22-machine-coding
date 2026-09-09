@@ -9,8 +9,8 @@ import { Users } from '../../services/users';
   styleUrl: './cached-api.scss',
 })
 export class CachedApi {
-  private destroyRef = inject(DestroyRef);
-  private users = inject(Users);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly users = inject(Users);
 
   constructor(){
     // all API 4 times

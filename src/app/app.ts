@@ -14,8 +14,8 @@ import { filter } from 'rxjs';
 export class App {
   protected readonly title = signal('Angular-22-machine-coding');
 
-  private router = inject(Router);
-  private analytics = inject(GoogleAnalytics);
+  private readonly router = inject(Router);
+  private readonly analytics = inject(GoogleAnalytics);
 
   constructor() {
     this.router.events

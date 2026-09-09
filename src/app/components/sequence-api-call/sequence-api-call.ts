@@ -35,7 +35,7 @@ getComments(post.id)
   styleUrl: './sequence-api-call.scss',
 })
 export class SequenceApiCall {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
   click$ = new Subject<number>();
 
   getPostsByUID(userId: number) {

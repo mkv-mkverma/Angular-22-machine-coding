@@ -19,7 +19,7 @@ interface Photo {
   styleUrl: './api-merge-id.scss',
 })
 export class ApiMergeId {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
   /**
    * Paralle Independent API call
  * Optimized for Large Data use Map Lookup

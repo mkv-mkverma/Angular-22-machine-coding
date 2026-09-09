@@ -10,8 +10,8 @@ import { UserManagementService } from '../service/user-management';
   styleUrl: './add-user.scss',
 })
 export class AddUser {
-  private router = inject(Router);
-  private userManagementService = inject(UserManagementService);
+  private readonly router = inject(Router);
+  private readonly userManagementService = inject(UserManagementService);
   firstName = signal('');
   lastName = signal('');
   age = signal('');

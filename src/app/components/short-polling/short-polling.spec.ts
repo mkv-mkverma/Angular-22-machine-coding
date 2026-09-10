@@ -3,8 +3,8 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { TestBed } from '@angular/core/testing';
 import { vi } from 'vitest';
 
-import { API_URL } from '../core/tokens/api-url.token';
 import { ShortPolling } from './short-polling';
+import { API_URL } from '../../core/tokens/api-url.token';
 
 describe('ShortPolling', () => {
   let httpMock: HttpTestingController;
@@ -42,7 +42,9 @@ describe('ShortPolling', () => {
     try {
       const fixture = TestBed.createComponent(ShortPolling);
       vi.advanceTimersByTime(0);
-      httpMock.expectOne('https://jsonplaceholder.typicode.com/users').flush([{ id: 1, name: 'Manish' }]);
+      httpMock
+        .expectOne('https://jsonplaceholder.typicode.com/users')
+        .flush([{ id: 1, name: 'Manish' }]);
 
       expect(fixture.componentInstance.users()).toEqual([{ id: 1, name: 'Manish' }]);
 
@@ -63,7 +65,9 @@ describe('ShortPolling', () => {
       httpMock.expectOne('https://jsonplaceholder.typicode.com/users').flush([]);
 
       fixture.componentInstance.getUsers().subscribe();
-      httpMock.expectOne('https://jsonplaceholder.typicode.com/users').flush([{ id: 2, name: 'Rahul' }]);
+      httpMock
+        .expectOne('https://jsonplaceholder.typicode.com/users')
+        .flush([{ id: 2, name: 'Rahul' }]);
     } finally {
       vi.useRealTimers();
     }

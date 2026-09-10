@@ -7,7 +7,7 @@ import {
 } from '@angular/router';
 
 import { routes } from './app.routes';
-import { API_URL } from './components/core/tokens/api-url.token';
+import { API_URL } from './core/tokens/api-url.token';
 import { environment } from '../environments/environment';
 
 import { provideHttpClient, withInterceptors } from '@angular/common/http';

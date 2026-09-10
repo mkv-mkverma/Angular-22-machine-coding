@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { switchMap, timer } from 'rxjs';
-import { API_URL } from '../core/tokens/api-url.token';
+import { API_URL } from '../../core/tokens/api-url.token';
 
 interface User {
   id: number;
@@ -37,12 +37,11 @@ export class ShortPolling {
 
   // private destroyRef = inject(DestroyRef);
 
-
-/**
- * takeUntilDestroyed() is called inside Angular's injection context 
- * (like a component constructor/field initializer), 
- * Angular's DI system knows the current component and its DestroyRef.
- */
+  /**
+   * takeUntilDestroyed() is called inside Angular's injection context
+   * (like a component constructor/field initializer),
+   * Angular's DI system knows the current component and its DestroyRef.
+   */
 
   // users$
   //   .pipe(

@@ -4,16 +4,11 @@ import { Analytics } from '../analytics/analytics';
 
 @Service({ autoProvided: false })
 export class GlobalErrorHandler implements ErrorHandler {
-
   private readonly analyticsService = inject(Analytics);
   private readonly router = inject(Router);
 
   handleError(error: unknown): void {
-
-    const errorMessage =
-      error instanceof Error
-        ? error.message
-        : String(error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
     const errorStack = error instanceof Error ? error.stack : undefined;
 
     this.analyticsService.trackEvent({
@@ -22,8 +17,9 @@ export class GlobalErrorHandler implements ErrorHandler {
         message: errorMessage,
         stack: errorStack,
         url: this.router.url,
-        timestamp: new Date().toISOString()
-      })
+        timestamp: new Date().toISOString(),
+        // Browser Details, unsensative user info
+      }),
     });
 
     // Important:

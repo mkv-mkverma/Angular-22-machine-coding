@@ -59,7 +59,7 @@ export class Auth {
           // any JS running on the page — including injected XSS payloads.
           // localStorage nor plain in-memory:
           // refresh token in an HttpOnly cookie set by the backend — JS can't read it at all, XSS can't touch it.
-          // TODO: Store tokens in HttpOnly cookies instead of localStorage or in memory for better security.
+          // Store tokens in HttpOnly cookies instead of localStorage or in memory for better security.
           // localStorage.setItem('accessToken', response.accessToken);
           // localStorage.setItem('refreshToken', response.refreshToken);
         }),

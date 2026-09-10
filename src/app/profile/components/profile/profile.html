@@ -3,3 +3,9 @@
     <strong>User Name</strong> {{ user.firstName }} - {{ user.lastName }}
   }
 </section>
+
+<section>
+  @if (user()) {
+    <strong>User Name</strong> {{ fullName() }}
+  }
+</section>

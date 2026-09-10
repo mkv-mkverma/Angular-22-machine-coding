@@ -42,7 +42,7 @@ Create Map -> O(n) Lookup -> O(1) Overall = O(n)
           return {
             ...user,
             //  ...(photos.find((p) => p.id === user.id) ?? null),
-            ...(photosById.get(user.id) ?? {}),
+            ...(photosById.get(user.id)),
           };
         });
       }),

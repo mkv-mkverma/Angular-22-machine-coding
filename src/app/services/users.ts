@@ -22,10 +22,6 @@ export class Users {
   private readonly http = inject(HttpClient);
   private user$?: Observable<User[]>;
 
-  getUsers() {
-    return this.http.get<User[]>('https://jsonplaceholder.typicode.com/users');
-  }
-
   getuserCashed(): Observable<User[]> {
     // if (!this.user$) {
     // bufferSize: 1 retains the most recent API response for future subscribers.
@@ -39,6 +35,10 @@ export class Users {
     this.user$ ??= this.getUsers().pipe(shareReplay({ bufferSize: 1, refCount: false }));
 
     return this.user$;
+  }
+
+  getUsers() {
+    return this.http.get<User[]>('https://jsonplaceholder.typicode.com/users');
   }
 
   refreshUsers(): void {

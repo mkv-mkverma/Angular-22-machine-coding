@@ -1,10 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Profile } from '../../profile/components/profile/profile';
 import { DASHBOARD_CARDS } from './dashboard.constant';
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterLink, Profile],
+  imports: [RouterLink],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })

@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { ProfileService } from '../../services/profile-service';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-profile',
@@ -22,4 +23,8 @@ export class Profile {
     distinctUntilChanged(),
     switchMap((id) => this.profileService.getCachedUser(id)),
   );
+
+  user = toSignal(this.user$);
+
+  fullName = computed(() => `${this.user()?.firstName} ${this.user()?.lastName}`);
 }

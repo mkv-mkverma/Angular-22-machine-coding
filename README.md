@@ -84,3 +84,13 @@ git merge origin/main # bring latest main changes into your feature branch
 **Create a merge commit** — retains all 11 commits and creates an additional “merge” commit that joins your branch with main. Useful when you want to preserve the branch’s exact history.
 
 **Rebase and merge** — replays the 11 commits one-by-one on top of the latest main, with no merge commit. Keeps a linear history, but changes commit hashes.
+
+
+## Upcoming 
+1. Enhance Google Analytics Events
+2. Telemetry 
+3. AWS S3 + Jenkins CI/CD
+4. Protect Guards - bug
+5. New Auth 
+6. Playwright
+7. Header, Footer Lib

@@ -29,6 +29,20 @@ I also encourage developers to take ownership of their changes, write tests and 
 3. How do you handle code reviews?
    correctness, maintainability, performance and consistency with our architecture.
 
+   I handle code reviews with four main areas in mind: **correctness, maintainability, performance, and architectural consistency**.
+
+First, I check **correctness** — whether the code solves the requirement, handles edge cases, errors, and doesn't introduce regressions.
+
+Second, I look at **maintainability** — readability, naming, separation of concerns, reusability, complexity, and whether the code will be easy for another developer to understand and modify.
+
+Third, I check **performance** — unnecessary API calls, excessive change detection or re-renders, memory leaks, large bundle impact, and inefficient loops or data processing.
+
+Finally, I check **architectural consistency** — whether the implementation follows our existing project patterns, shared components, state-management approach, folder structure, coding standards, and established design principles.
+
+I also distinguish between **blocking issues and suggestions**. I block issues that affect correctness, security, performance, or architecture, while smaller style or improvement points are suggestions.
+
+My goal isn't just to find problems; it's to make the code better while keeping the review collaborative and helping the developer understand the reasoning behind the feedback.
+
 If I suggest a change, I explain the reason rather than simply saying that something is wrong.
 
 4. Tell me about a time you improved code quality
@@ -308,7 +322,7 @@ Before creating a new component, I would check whether an existing component can
 
 I would publish the library through our internal package repository and follow semantic versioning so consuming applications can upgrade safely.
 
-My goal would be **reusable UI + consistent design + good developer experience without coupling the library to business-specific logic.**
+My goal would be **reusable UI + consistent design + good er experience without coupling the library to business-specific logic.**
 
 23. when would you use MFE over liburary
 
@@ -350,3 +364,32 @@ Agree on approach
 Implement
 ↓
 Demo / validate
+
+25. How do you handle delivery pressure and production problems?
+
+Delivery pressure / Production issue
+↓
+Understand priority + impact
+↓
+Communicate clearly
+↓
+Prioritize critical work
+↓
+Fix / workaround
+↓
+Test before release
+↓
+Monitor production
+↓
+Root cause + prevention
+
+First, I understand the business impact and prioritize the most critical issue. I communicate clearly with stakeholders about the impact, expected timeline, and risks.
+
+For a production issue, I focus first on restoring the service—using a rollback or safe workaround if required. Then I investigate and fix the root cause.
+
+For delivery pressure, I don't compromise critical quality or security just to meet a deadline. If a shortcut is necessary, I make the trade-off clear, document the technical debt, and plan the follow-up work.
+
+After the issue is resolved, I do a root-cause analysis and add preventive measures such as tests, monitoring, or process improvements.
+
+26. How can you make the right architecture trade-offs?
+Problem → Options → Pros/Cons → Choose → Explain why

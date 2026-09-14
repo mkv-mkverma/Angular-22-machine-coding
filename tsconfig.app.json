@@ -3,12 +3,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "types": []
+    "types": [],
+    "target": "ES2022",
+    "lib": ["ES2023", "DOM"]
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "src/**/*.spec.ts"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.spec.ts"]
 }

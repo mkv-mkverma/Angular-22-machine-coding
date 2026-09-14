@@ -1,6 +1,14 @@
-<p>virtual-scroll works!</p>
-<cdk-virtual-scroll-viewport [itemSize]="50" style="height: 400px">
-  <div *cdkVirtualFor="let item of items; trackBy: trackById">
+<p>
+  <strong>virtual-scroll</strong> : Suppose I have 10,000 records. Normally, Angular would create
+  DOM elements for all 10,000 records, which can affect performance. With virtual scroll, we don't
+  create DOM elements for all 10,000. We create DOM elements only for the records currently visible
+  on the screen, plus a small buffer. When the user scrolls, the rendered items are updated
+</p>
+<cdk-virtual-scroll-viewport [itemSize]="30" style="background-color: aquamarine; height: 400px">
+  <div
+    *cdkVirtualFor="let item of items; let i = index; trackBy: trackById"
+    [ngClass]="i % 2 === 0 ? 'row-even' : 'row-odd'"
+  >
     {{ item.name }}
   </div>
 </cdk-virtual-scroll-viewport>

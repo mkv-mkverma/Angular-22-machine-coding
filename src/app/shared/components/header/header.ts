@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive } from "@angular/router";
-import { Auth } from '../../core/auth/auth';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Auth } from '../../../core/auth/auth';
 
 @Component({
   selector: 'app-header',

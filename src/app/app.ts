@@ -1,9 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { Header } from './header/header/header';
-import { Footer } from './footer/footer/footer';
+
 import { GoogleAnalytics } from './core/analytics/google-analytics';
 import { filter } from 'rxjs';
+import { Header } from './shared/components/header/header';
+import { Footer } from './shared/components/footer/footer';
 
 @Component({
   selector: 'app-root',

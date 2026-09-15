@@ -2,6 +2,8 @@
 
 ## 1. `type` vs `interface`
 
+Both describe shapes. `interface` supports declaration merging and is extended with `extends`; `type` supports unions, tuples, and intersections (`&`), which `interface` can't express directly.
+
 ```ts
 // interface
 interface User {
@@ -9,7 +11,7 @@ interface User {
 }
 interface User {
   age: number;
-} // declaration merging -> p: User = { name: '', age: '' }
+} // declaration merging -> p: User = { name: '', age: 9 }
 
 interface UserNew extends User {
   address: string;
@@ -32,6 +34,8 @@ type Emp = [string, number, ...boolean[]]; // tuple
 
 ## 2. Union / Intersection
 
+A union (`|`) means "one of these types." An intersection (`&`) means "all of these types combined."
+
 ```ts
 let id: number | string; // union
 type Status = "Success" | "fail"; // union
@@ -39,11 +43,11 @@ type Status = "Success" | "fail"; // union
 type PersonNew = Person & { age: number }; // intersection
 ```
 
-## 3. Difference between `any`, `unknown` and `never`
+## 3. `any` vs `unknown` vs `never`
 
-- **any** → disables type checking and affects tree shaking
-- **unknown** → can store any value, but you must check its type before using it
-- **never** → nothing can exist here, e.g. `throw new Error()`
+- **`any`** → disables type checking and affects tree shaking
+- **`unknown`** → can store any value, but you must check its type before using it
+- **`never`** → nothing can exist here, e.g. `throw new Error()`
 
 ## 4. Generics
 
@@ -94,30 +98,36 @@ interface User {
 }
 ```
 
-**`Partial<T>`** — use case: update API, send only changed fields.
+### `Partial<T>`
+
+Use case: update API, send only changed fields.
 
 ```ts
 type UserPartial = Partial<User>;
 
 function updateUser(id: number, changes: UserPartial) {}
 
-updateUser(1, { name: "Manish" }); // ✅ only name
-updateUser(1, { email: "m@gmail.com" }); // ✅ only email
+updateUser(1, { name: "Manish" }); // only name
+updateUser(1, { email: "m@gmail.com" }); // only email
 // No need to send all fields
 ```
 
-**`Required<T>`** — every field must be present.
+### `Required<T>`
+
+Every field must be present.
 
 ```ts
 const newUser: Required<User> = {
   id: 1,
   name: "Manish",
   email: "m@gmail.com",
-  password: "1234", // ❌ Error if missing
+  password: "1234", // error if missing
 };
 ```
 
-**`Pick<T, K>`** — show user in UI, don't expose password.
+### `Pick<T, K>`
+
+Show user in UI, don't expose password.
 
 ```ts
 type UserProfile = Pick<User, "id" | "name" | "email">;
@@ -126,11 +136,13 @@ const profile: UserProfile = {
   id: 1,
   name: "Manish",
   email: "m@gmail.com",
-  // password not here ✅
+  // password not here
 };
 ```
 
-**`Omit<T, K>`** — everything except password.
+### `Omit<T, K>`
+
+Everything except password.
 
 ```ts
 type SafeUser = Omit<User, "password">;
@@ -139,11 +151,11 @@ const safeUser: SafeUser = {
   id: 1,
   name: "Manish",
   email: "m@gmail.com",
-  // password removed ✅
+  // password removed
 };
 ```
 
-**`Readonly<T>`**
+### `Readonly<T>`
 
 ```ts
 const user: Readonly<User> = {
@@ -153,10 +165,12 @@ const user: Readonly<User> = {
   password: "1234",
 };
 
-user.name = "Kumar"; // ❌ Error — cannot assign to readonly
+user.name = "Kumar"; // error — cannot assign to readonly
 ```
 
-**`Record<K, T>`** — map role to permissions.
+### `Record<K, T>`
+
+Map role to permissions.
 
 ```ts
 type Role = "admin" | "editor" | "viewer";
@@ -169,6 +183,8 @@ const permissions: Record<Role, string[]> = {
 ```
 
 ## 6. `keyof`
+
+`keyof` produces a union of an object type's property names — useful for writing functions that accept "any key of this type" safely.
 
 ```ts
 interface User {
@@ -217,9 +233,9 @@ interface Admin {
 
 Narrowing techniques:
 
-- `typeof`
-- Equality check `===`
-- `instanceof` — e.g. `value instanceof Date` where `value: Date | String`
+- `typeof` — e.g. `typeof value === "string"`
+- Equality check — e.g. `value === "Success"`
+- `instanceof` — e.g. `value instanceof Date` where `value: Date | string`
 - `in` — e.g. `"permissions" in user`
 
 ## 8. How should you design a type-safe API response model?
@@ -263,10 +279,14 @@ Type guards narrow union types at runtime. I use `typeof` for primitives, `insta
 
 ## 10. `typeof`
 
+At runtime (plain JS), `typeof` returns a value's type as a string:
+
 ```ts
 const val = "hello";
 console.log(typeof val); // "string" — at runtime, JS
 ```
+
+In TypeScript's type position, `typeof` extracts the *type* of a value — handy so you don't hand-write an interface that already exists as an object literal.
 
 ```ts
 const user = {
@@ -291,7 +311,7 @@ type Config = typeof config;
 function init(cfg: Config) {} // reuse the type
 ```
 
-I use `typeof` to extract a type from a value — so I don't duplicate code.
+Combine `typeof` with `keyof` to pull key names straight from a value:
 
 ```ts
 const user = { id: 1, name: "Manish", email: "m@gmail.com" };

@@ -108,4 +108,10 @@ export const DASHBOARD_CARDS: DashboardCard[] = [
     icon: '⏱️',
     route: '/emit-one-sec',
   },
+  {
+    title: 'Sentry Test',
+    description: 'Triggers errors to verify Sentry monitoring integration.',
+    icon: '🐞',
+    route: '/sentry-test',
+  },
 ];

@@ -156,8 +156,12 @@ export const routes: Routes = [
   {
     path: 'emit-one-sec',
     title: 'Emit One Sec',
+    loadComponent: () => import('./components/emit-one-sec/emit-one-sec').then((c) => c.EmitOneSec),
+  },
+  {
+    path: 'sentry-test',
     loadComponent: () =>
-      import('./components/emit-one-sec/emit-one-sec').then((c) => c.EmitOneSec),
+      import('./features/monitoring/sentry-test/sentry-test').then((m) => m.SentryTest),
   },
   {
     path: '**',

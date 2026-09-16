@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { Dashboard } from './components/dashboard/dashboard';
-import { PageNotFound } from './components/page-not-found/page-not-found';
+import { PageNotFound } from './shared/components/page-not-found/page-not-found';
 import { dashboardResolver, dashboardResolverTest } from './resolvers/dashboard-resolver';
 import { Profile } from './profile/components/profile/profile';
 import { Users } from './features/users/users';

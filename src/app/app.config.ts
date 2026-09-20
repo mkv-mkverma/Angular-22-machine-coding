@@ -16,7 +16,7 @@ import { errorInterceptor } from './core/interceptors/error-interceptor';
 import { retryInterceptor } from './core/interceptors/retry-interceptor';
 import { loggingInterceptor } from './core/interceptors/logging-interceptor';
 import { GlobalErrorHandler } from './core/error/global-error-handler';
-import { AppPreloadingStrategy } from './app-preloading-strategy';
+import { AppPreloadingStrategy } from './core/routing/preloading-strategy/app-preloading-strategy';
 
 export const appConfig: ApplicationConfig = {
   providers: [

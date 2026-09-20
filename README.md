@@ -7,7 +7,12 @@ Angular 22 interview practice project.
 https://mkv-mkverma.github.io/Angular-22-machine-coding/
 
 ## Sonar
+
 https://sonarcloud.io/summary/overall?id=mkv-mkverma_Angular-22-machine-coding&branch=main
+
+## Sentry
+
+https://manish-7e.sentry.io/issues/?project=4512096706822144
 
 ## Topics Covered
 
@@ -49,6 +54,7 @@ This project uses ESLint and Husky to catch common issues before code is committ
 npm install --save-dev husky
 npx husky init
 ng add angular-eslint
+npm install @sentry/angular
 ```
 
 - `husky` lets the repository run scripts during Git actions, such as `git commit`.
@@ -85,12 +91,20 @@ git merge origin/main # bring latest main changes into your feature branch
 
 **Rebase and merge** — replays the 11 commits one-by-one on top of the latest main, with no merge commit. Keeps a linear history, but changes commit hashes.
 
+## Upcoming
 
-## Upcoming 
 1. Enhance Google Analytics Events
-2. Telemetry 
+2. Telemetry sentry (DONE)
 3. AWS S3 + Jenkins CI/CD
 4. Protect Guards - bug
-5. New Auth 
+5. New Auth
 6. Playwright
 7. Header, Footer Lib
+
+## Structure
+
+- core → infrastructure
+- features → application functionality
+- playground → practice
+- shared → reusable UI
+- docs → explanations/notes

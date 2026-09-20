@@ -3,7 +3,7 @@ import { ActivatedRoute, convertToParamMap, provideRouter } from '@angular/route
 import { of } from 'rxjs';
 
 import { Dashboard } from './dashboard';
-import { ProfileService } from '../../profile/services/profile-service';
+import { ProfileService } from '../../features/profile/services/profile-service';
 
 describe('Dashboard', () => {
   let component: Dashboard;
@@ -56,7 +56,8 @@ describe('Dashboard', () => {
   });
 
   it('renders a card link for every dashboard entry', () => {
-    const links: NodeListOf<HTMLAnchorElement> = fixture.nativeElement.querySelectorAll('a.dashboard-card');
+    const links: NodeListOf<HTMLAnchorElement> =
+      fixture.nativeElement.querySelectorAll('a.dashboard-card');
     expect(links.length).toBe(component.cards.length);
   });
 });

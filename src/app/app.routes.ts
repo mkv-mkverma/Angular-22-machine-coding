@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { Dashboard } from './components/dashboard/dashboard';
+import { Dashboard } from './playground/dashboard/dashboard';
 import { PageNotFound } from './shared/components/page-not-found/page-not-found';
 import { dashboardResolver, dashboardResolverTest } from './resolvers/dashboard-resolver';
-import { Profile } from './profile/components/profile/profile';
+import { Profile } from './features/profile/components/profile/profile';
 import { Users } from './features/users/users';
 import { UserManagement } from './features/user-management/user-management';
 export const routes: Routes = [
@@ -43,7 +43,7 @@ export const routes: Routes = [
     path: 'virtual-scroll',
     title: 'virtual-Scroll',
     loadComponent: () =>
-      import('./components/virtual-scroll/virtual-scroll').then((c) => c.VirtualScroll),
+      import('./playground/virtual-scroll/virtual-scroll').then((c) => c.VirtualScroll),
     data: {
       preload: true,
     },
@@ -52,29 +52,29 @@ export const routes: Routes = [
   {
     path: 'exhaust-map',
     title: 'Exhaust Map',
-    loadComponent: () => import('./components/exhaust-map/exhaust-map').then((c) => c.ExhaustMap),
+    loadComponent: () => import('./playground/exhaust-map/exhaust-map').then((c) => c.ExhaustMap),
   },
   {
     path: 'short-polling',
     title: 'Short Polling',
     loadComponent: () =>
-      import('./components/short-polling/short-polling').then((c) => c.ShortPolling),
+      import('./playground/short-polling/short-polling').then((c) => c.ShortPolling),
   },
   {
     path: 'retry',
     title: 'Retry',
-    loadComponent: () => import('./components/retry/retry').then((c) => c.Retry),
+    loadComponent: () => import('./playground/retry/retry').then((c) => c.Retry),
   },
   {
     path: 'retry-when',
     title: 'Retry When',
-    loadComponent: () => import('./components/retry-when/retry-when').then((c) => c.RetryWhen),
+    loadComponent: () => import('./playground/retry-when/retry-when').then((c) => c.RetryWhen),
   },
   {
     path: 'autocomplete',
     title: 'Autocomplete',
     loadComponent: () =>
-      import('./components/auto-complete/auto-complete').then((c) => c.AutoComplete),
+      import('./playground/auto-complete/auto-complete').then((c) => c.AutoComplete),
     data: {
       preload: true,
     },
@@ -87,7 +87,7 @@ export const routes: Routes = [
   {
     path: 'todos',
     title: 'Todos',
-    loadComponent: () => import('./components/todos/todos').then((c) => c.Todos),
+    loadComponent: () => import('./playground/todos/todos').then((c) => c.Todos),
   },
   {
     path: 'login',
@@ -98,50 +98,50 @@ export const routes: Routes = [
   {
     path: 'merge-map',
     title: 'Merge Map',
-    loadComponent: () => import('./components/merge-map/merge-map').then((c) => c.MergeMap),
+    loadComponent: () => import('./playground/merge-map/merge-map').then((c) => c.MergeMap),
   },
   {
     path: 'combine-latest',
     title: 'Combine Latest',
     loadComponent: () =>
-      import('./components/combine-latest/combine-latest').then((c) => c.CombineLatest),
+      import('./playground/combine-latest/combine-latest').then((c) => c.CombineLatest),
   },
   {
     path: 'api-merge-id',
     title: 'Api Merge Id',
-    loadComponent: () => import('./components/api-merge-id/api-merge-id').then((c) => c.ApiMergeId),
+    loadComponent: () => import('./playground/api-merge-id/api-merge-id').then((c) => c.ApiMergeId),
   },
   {
     path: 'cached-api',
     title: 'Cached Api',
-    loadComponent: () => import('./components/cached-api/cached-api').then((c) => c.CachedApi),
+    loadComponent: () => import('./playground/cached-api/cached-api').then((c) => c.CachedApi),
   },
   {
     path: 'sequence-api-call',
     title: 'Sequence Api Call',
     loadComponent: () =>
-      import('./components/sequence-api-call/sequence-api-call').then((c) => c.SequenceApiCall),
+      import('./playground/sequence-api-call/sequence-api-call').then((c) => c.SequenceApiCall),
   },
   {
     path: 'user-filter',
     title: 'User Filter',
-    loadComponent: () => import('./components/user-filter/user-filter').then((c) => c.UserFilter),
+    loadComponent: () => import('./playground/user-filter/user-filter').then((c) => c.UserFilter),
   },
   {
     path: 'rx',
     title: 'rx-resource',
-    loadComponent: () => import('./components/rxresource/rxresource').then((c) => c.Rxresource),
+    loadComponent: () => import('./playground/rxresource/rxresource').then((c) => c.Rxresource),
   },
   {
     path: 'memory-leak',
     title: 'Memory Leak',
-    loadComponent: () => import('./components/memory-leak/memory-leak').then((c) => c.MemoryLeak),
+    loadComponent: () => import('./playground/memory-leak/memory-leak').then((c) => c.MemoryLeak),
   },
   {
     path: 'error-component',
     title: 'Global Error Component',
     loadComponent: () =>
-      import('./components/global-error-component/global-error-component').then(
+      import('./features/global-error-component/global-error-component').then(
         (c) => c.GlobalErrorComponent,
       ),
   },
@@ -149,14 +149,14 @@ export const routes: Routes = [
     path: 'reusable-table',
     title: 'Reusable Table',
     loadComponent: () =>
-      import('./components/using-reusable-table/using-reusable-table').then(
+      import('./playground/using-reusable-table/using-reusable-table').then(
         (c) => c.UsingReusableTable,
       ),
   },
   {
     path: 'emit-one-sec',
     title: 'Emit One Sec',
-    loadComponent: () => import('./components/emit-one-sec/emit-one-sec').then((c) => c.EmitOneSec),
+    loadComponent: () => import('./playground/emit-one-sec/emit-one-sec').then((c) => c.EmitOneSec),
   },
   {
     path: 'sentry-test',

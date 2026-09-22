@@ -1,0 +1,14 @@
+<p>autocomplete works!</p>
+<input type="text" placeholder="search.." [formField]="searchForm" />
+
+@if (isloading()) {
+  <p>Loading...</p>
+} @else {
+  <ul>
+    @for (product of products(); track product.id) {
+      <li>{{ product.title }}</li>
+    } @empty {
+      <li>No Product</li>
+    }
+  </ul>
+}

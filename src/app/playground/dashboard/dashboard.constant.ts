@@ -109,6 +109,12 @@ export const DASHBOARD_CARDS: DashboardCard[] = [
     route: '/emit-one-sec',
   },
   {
+    title: 'Signals',
+    description: 'Reactive state with signal, computed, effect, and linkedSignal.',
+    icon: '📶',
+    route: '/signals',
+  },
+  {
     title: 'Sentry Test',
     description: 'Triggers errors to verify Sentry monitoring integration.',
     icon: '🐞',

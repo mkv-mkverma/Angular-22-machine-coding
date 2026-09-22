@@ -1,0 +1,19 @@
+<h2>Signals</h2>
+<p>{{ fullName() }}</p>
+<input type="text" placeholder="change name..." [formControl]="nameControl" />
+<button (click)="handleChangeName()">Change Name</button>
+
+<hr />
+<ul>
+  @for (product of products(); track product.name) {
+    <li>
+      Name: {{ product.name }} , Price: {{ product.price }}
+      <button (click)="handleRemoveProductByName(product.name)">Remove</button>
+    </li>
+  }
+  <ul>
+    <p>Total Price: {{ totalPrice() }}</p>
+    <button (click)="handleAddProduct()">Add more Product</button>
+    <button (click)="handleRemoveProduct()">Remove Last Product</button>
+  </ul>
+</ul>

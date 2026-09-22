@@ -159,6 +159,11 @@ export const routes: Routes = [
     loadComponent: () => import('./playground/emit-one-sec/emit-one-sec').then((c) => c.EmitOneSec),
   },
   {
+    path: 'signals',
+    title: 'Signals',
+    loadComponent: () => import('./playground/signals/signals').then((c) => c.Signals),
+  },
+  {
     path: 'sentry-test',
     loadComponent: () =>
       import('./features/monitoring/sentry-test/sentry-test').then((m) => m.SentryTest),

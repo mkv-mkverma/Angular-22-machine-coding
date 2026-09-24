@@ -26,10 +26,21 @@ done
 
 [ -z "$range" ] && exit 0 # not pushing to main
 
+# Only app code is worth an AI review; skip pushes that touch just scripts/docs/config.
+if [ -z "$(git diff --name-only "$range" -- src/)" ]; then
+  echo "⏭  AI review skipped (no changes under src/)"
+  exit 0
+fi
+
 echo "🤖 Running AI code review on $range ..."
 
+# Embed the diff so the agent doesn't spend turns fetching it (capped to keep it fast).
+diff_text=$(git diff "$range" -- src/ | head -c 60000)
+
 # Prompt goes via stdin: --allowedTools is variadic and would swallow a positional prompt.
-prompt="Review exactly the commits in range $range (use: git diff $range). Lint, tests and build are already run by the pre-push hook, so skip running them."
+prompt="Review exactly the commits in range $range. The diff (src/ only, possibly truncated) is below — use it directly; only read files when you need surrounding context, and use git diff $range if it was truncated. Lint, tests and build are already run by the pre-push hook, so skip running them.
+
+$diff_text"
 
 timeout_s=${AI_REVIEW_TIMEOUT:-600}
 out_file=$(mktemp)

@@ -31,10 +31,35 @@ echo "🤖 Running AI code review on $range ..."
 # Prompt goes via stdin: --allowedTools is variadic and would swallow a positional prompt.
 prompt="Review exactly the commits in range $range (use: git diff $range). Lint, tests and build are already run by the pre-push hook, so skip running them."
 
-output=$(echo "$prompt" | claude -p \
+timeout_s=${AI_REVIEW_TIMEOUT:-600}
+out_file=$(mktemp)
+trap 'rm -f "$out_file"' EXIT
+
+# Run in the background so we can show progress and enforce a timeout
+# (claude -p prints nothing until the review is finished).
+echo "$prompt" | claude -p \
   --agent code-reviewer \
-  --allowedTools "Read,Grep,Glob,Bash(git diff:*),Bash(git log:*),Bash(git show:*),Bash(git status:*),Bash(git ls-files:*)")
+  --allowedTools "Read,Grep,Glob,Bash(git diff:*),Bash(git log:*),Bash(git show:*),Bash(git status:*),Bash(git ls-files:*)" \
+  >"$out_file" 2>&1 &
+pid=$!
+
+elapsed=0
+while kill -0 "$pid" 2>/dev/null; do
+  if [ "$elapsed" -ge "$timeout_s" ]; then
+    kill "$pid" 2>/dev/null
+    echo ""
+    echo "⚠️  AI review timed out after ${timeout_s}s — not blocking push (raise with AI_REVIEW_TIMEOUT=900)"
+    exit 0
+  fi
+  printf "\r   ⏳ reviewing... %ss (Ctrl+C to abort, SKIP_AI_REVIEW=1 to skip)" "$elapsed"
+  sleep 5
+  elapsed=$((elapsed + 5))
+done
+echo ""
+
+wait "$pid"
 status=$?
+output=$(cat "$out_file")
 
 echo "$output"
 

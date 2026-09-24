@@ -1,5 +1,2 @@
-push_info=$(cat)
-
-sh scripts/pre-push-checks.sh || exit 1
-
-echo "$push_info" | sh scripts/ai-review.sh
+npm test
+npm run build

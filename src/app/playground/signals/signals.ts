@@ -2,10 +2,11 @@ import { Component, computed, effect, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Autocomplete } from './autocomplete/autocomplete';
 import { Forms } from './forms/forms';
+import { Todo } from './todo/todo';
 
 @Component({
   selector: 'app-signals',
-  imports: [ReactiveFormsModule, Autocomplete, Forms],
+  imports: [ReactiveFormsModule, Autocomplete, Forms, Todo],
   templateUrl: './signals.html',
   styleUrl: './signals.scss',
 })

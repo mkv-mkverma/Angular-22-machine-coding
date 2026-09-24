@@ -58,6 +58,7 @@ export class Autocomplete {
 
   products = toSignal(this.products$, { initialValue: [] });
 
+  
   getProducts(searchText: string): Observable<APIResponse> {
     return this.http.get<APIResponse>(`https://dummyjson.com/products/search?q=${searchText}`);
   }

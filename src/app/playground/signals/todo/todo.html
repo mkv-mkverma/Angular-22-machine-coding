@@ -1,0 +1,17 @@
+<p>TODOS Length: {{ todosLength() }}</p>
+
+<form (submit)="editId() ? onUpdate($event) : onSubmit($event)">
+  <input placeholder="add task..." [formField]="taskForm" />
+</form>
+
+<ul>
+  @for (todo of todos(); track todo.id) {
+    <li>
+      {{ todo.task }}
+      <button (click)="onEdit(todo)">Edit</button>
+      <button (click)="onDelete(todo.id)">X</button>
+    </li>
+  } @empty {
+    <li>No Task Available</li>
+  }
+</ul>

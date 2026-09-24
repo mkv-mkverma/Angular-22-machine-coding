@@ -1,2 +1,6 @@
+push_info=$(cat)
+
 npm test
 npm run build
+
+echo "$push_info" | sh scripts/ai-review.sh

@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { email, form, FormField, minLength, pattern, required } from '@angular/forms/signals';
+import { email, form, FormField, maxLength, minLength, pattern, required } from '@angular/forms/signals';
 
 export interface IEmployee {
   name: string;
@@ -25,6 +25,7 @@ export class Forms {
     required(schema.email);
     required(schema.password);
     minLength(schema.name, 2);
+    maxLength(schema.name, 10);
     email(schema.email);
     pattern(schema.password, /^[A-Za-z ]+$/);
   });

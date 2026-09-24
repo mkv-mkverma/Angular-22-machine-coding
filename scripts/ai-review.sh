@@ -28,13 +28,12 @@ done
 
 echo "🤖 Running AI code review on $range ..."
 
-output=$(claude -p \
+# Prompt goes via stdin: --allowedTools is variadic and would swallow a positional prompt.
+prompt="Review exactly the commits in range $range (use: git diff $range). Lint, tests and build are already run by the pre-push hook, so skip running them."
+
+output=$(echo "$prompt" | claude -p \
   --agent code-reviewer \
-  --allowedTools "Read" "Grep" "Glob" \
-    "Bash(git diff:*)" "Bash(git log:*)" "Bash(git show:*)" \
-    "Bash(git status:*)" "Bash(git ls-files:*)" \
-  "Review exactly the commits in range $range (use: git diff $range). Lint, tests and build are already run by the pre-push hook, so skip running them." \
-  </dev/null)
+  --allowedTools "Read,Grep,Glob,Bash(git diff:*),Bash(git log:*),Bash(git show:*),Bash(git status:*),Bash(git ls-files:*)")
 status=$?
 
 echo "$output"

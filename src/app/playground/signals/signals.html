@@ -1,6 +1,7 @@
 <h2>Signals</h2>
 <p>{{ fullName() }}</p>
-<input type="text" placeholder="change name..." [formControl]="nameControl" />
+<label for="signals-name">Name</label>
+<input id="signals-name" type="text" placeholder="change name..." [formControl]="nameControl" />
 <button (click)="handleChangeName()">Change Name</button>
 
 <hr />

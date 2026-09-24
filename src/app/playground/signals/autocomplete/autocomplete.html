@@ -1,5 +1,6 @@
 <p>autocomplete works!</p>
-<input type="text" placeholder="search.." [formField]="searchForm" />
+<label for="autocomplete-search">Search products</label>
+<input id="autocomplete-search" type="text" placeholder="search.." [formField]="searchForm" />
 
 @if (isloading()) {
   <p>Loading...</p>

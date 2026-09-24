@@ -1,7 +1,15 @@
 <p>forms works!</p>
 <form (submit)="onSubmit($event)">
-  <input type="text" placeholder="name" [formField]="employeeForm.name" />
-  <input type="email" placeholder="email" [formField]="employeeForm.email" />
-  <input type="password" placeholder="password" [formField]="employeeForm.password" />
+  <label for="employee-name">Name</label>
+  <input id="employee-name" type="text" placeholder="name" [formField]="employeeForm.name" />
+  <label for="employee-email">Email</label>
+  <input id="employee-email" type="email" placeholder="email" [formField]="employeeForm.email" />
+  <label for="employee-password">Password</label>
+  <input
+    id="employee-password"
+    type="password"
+    placeholder="password"
+    [formField]="employeeForm.password"
+  />
   <button type="submit" [disabled]="!employeeForm().valid()">Submit</button>
 </form>

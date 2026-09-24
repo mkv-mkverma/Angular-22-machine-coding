@@ -1,7 +1,8 @@
 <p>TODOS Length: {{ todosLength() }}</p>
 
 <form (submit)="editId() ? onUpdate($event) : onSubmit($event)">
-  <input placeholder="add task..." [formField]="taskForm" />
+  <label for="todo-task">Task</label>
+  <input id="todo-task" placeholder="add task..." [formField]="taskForm" />
 </form>
 
 <ul>

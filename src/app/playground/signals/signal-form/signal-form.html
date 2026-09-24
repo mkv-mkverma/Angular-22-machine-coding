@@ -1,0 +1,57 @@
+<h2>Signal Form</h2>
+
+<form class="signal-form" novalidate (submit)="onSubmit($event)">
+  <div class="field">
+    <label for="user-name">Name</label>
+    <input id="user-name" type="text" placeholder="John Doe" [formField]="userForm.name" />
+    @if (userForm.name().touched() && userForm.name().invalid()) {
+      @for (error of userForm.name().errors(); track error.kind) {
+        <small class="error">{{ error.message }}</small>
+      }
+    }
+  </div>
+
+  <div class="field">
+    <label for="user-age">Age</label>
+    <input id="user-age" type="number" placeholder="18" [formField]="userForm.age" />
+    @if (userForm.age().touched() && userForm.age().invalid()) {
+      @for (error of userForm.age().errors(); track error.kind) {
+        <small class="error">{{ error.message }}</small>
+      }
+    }
+  </div>
+
+  <div class="field">
+    <label for="user-email">Email</label>
+    <input
+      id="user-email"
+      type="email"
+      placeholder="john@example.com"
+      [formField]="userForm.email"
+    />
+    @if (userForm.email().touched() && userForm.email().invalid()) {
+      @for (error of userForm.email().errors(); track error.kind) {
+        <small class="error">{{ error.message }}</small>
+      }
+    }
+  </div>
+
+  <div class="field">
+    <label for="user-password">Password</label>
+    <input id="user-password" type="password" [formField]="userForm.password" />
+    @if (userForm.password().touched() && userForm.password().invalid()) {
+      @for (error of userForm.password().errors(); track error.kind) {
+        <small class="error">{{ error.message }}</small>
+      }
+    }
+  </div>
+
+  <div class="actions">
+    <button type="submit" [disabled]="userForm().submitting()">Submit</button>
+    <button type="button" (click)="reset()">Reset</button>
+  </div>
+</form>
+
+@if (submittedUser(); as submitted) {
+  <p class="success">Submitted: {{ submitted.name }} ({{ submitted.age }}) - {{ submitted.email }}</p>
+}

@@ -164,6 +164,20 @@ export const routes: Routes = [
     loadComponent: () => import('./playground/signals/signals').then((c) => c.Signals),
   },
   {
+    path: 'signal-autocomplete',
+    title: 'Signal Autocomplete',
+    loadComponent: () =>
+      import('./playground/signals/signal-autocomplete/signal-autocomplete').then(
+        (c) => c.SignalAutocomplete,
+      ),
+  },
+  {
+    path: 'signal-form',
+    title: 'Signal Form',
+    loadComponent: () =>
+      import('./playground/signals/signal-form/signal-form').then((c) => c.SignalForm),
+  },
+  {
     path: 'sentry-test',
     loadComponent: () =>
       import('./features/monitoring/sentry-test/sentry-test').then((m) => m.SentryTest),

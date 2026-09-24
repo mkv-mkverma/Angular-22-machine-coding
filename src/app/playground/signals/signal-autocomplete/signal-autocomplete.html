@@ -1,0 +1,41 @@
+<section class="product-search">
+  <h2>Product Search</h2>
+
+  <div class="search-bar">
+    <label for="signal-autocomplete-search">Search products</label>
+    <input
+      id="signal-autocomplete-search"
+      type="text"
+      placeholder="e.g. phone"
+      [value]="searchText()"
+      (input)="onSearch($event)"
+    />
+    @if (searchText()) {
+      <button type="button" (click)="clear()">Clear</button>
+    }
+  </div>
+
+  @if (productsResource.isLoading()) {
+    <p class="status">Loading...</p>
+  } @else if (productsResource.error()) {
+    <p class="status error">Something went wrong. Please try again.</p>
+  } @else if (productsResource.hasValue()) {
+    <p class="status">{{ total() }} result(s)</p>
+    <ul>
+      @for (product of products(); track product.id) {
+        <li>
+          <img [src]="product.thumbnail" [alt]="product.title" width="56" height="56" />
+          <div class="info">
+            <span class="title">{{ product.title }}</span>
+            <span class="description">{{ product.description }}</span>
+          </div>
+          <span class="price">${{ product.price }}</span>
+        </li>
+      } @empty {
+        <li class="empty">No products found</li>
+      }
+    </ul>
+  } @else {
+    <p class="status">Start typing to search products.</p>
+  }
+</section>

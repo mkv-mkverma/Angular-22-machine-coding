@@ -215,6 +215,12 @@ based on the one run that happened to pass.
 
 ### Step 10
 
+Run `npm run lint` and fix any errors in the spec files you touched (e.g.
+unused variables/imports). The pre-commit hook runs lint, so specs that fail
+it block the commit.
+
+### Step 11
+
 Report:
 
 - Files analyzed

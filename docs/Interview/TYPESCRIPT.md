@@ -1,3 +1,71 @@
+# JavaScript (JS) and TypeScript (TS)
+
+## 1. What is JavaScript (JS)?
+
+- JavaScript is a programming language.
+- It is mainly used to build interactive web applications.
+- It runs in browsers like Chrome, Edge, and Firefox.
+- JavaScript is **dynamically typed**.
+- We don't need to specify the data type of a variable.
+
+### Example
+
+```javascript
+let name = 'Manish';
+let age = 35;
+
+age = 'Hello'; // Allowed in JavaScript
+```
+
+---
+
+## 2. What is TypeScript (TS)?
+
+- TypeScript is a **superset of JavaScript** developed by Microsoft.
+- It adds **static typing** to JavaScript.
+- TypeScript code is converted/transpiled into JavaScript before it runs.
+- It helps catch errors during development.
+- It is commonly used in large applications such as Angular applications.
+
+### Example
+
+```typescript
+let name: string = 'Manish';
+let age: number = 35;
+
+age = 'Hello'; // TypeScript error
+```
+
+---
+
+## 3. TypeScript vs JavaScript
+
+| Feature             | JavaScript (JS)                  | TypeScript (TS)                    |
+| ------------------- | -------------------------------- | ---------------------------------- |
+| Type                | Dynamically typed                | Statically typed                   |
+| Type checking       | Mostly runtime                   | Compile-time + runtime JS behavior |
+| Compilation         | Runs directly in browser/Node.js | Must be transpiled to JavaScript   |
+| Type safety         | Less                             | More                               |
+| Interfaces          | ❌                               | ✅                                 |
+| Generics            | ❌                               | ✅                                 |
+| Enums               | ❌                               | ✅                                 |
+| Access modifiers    | Limited/private syntax           | `public`, `private`, `protected`   |
+| Tooling             | Good                             | Better autocomplete/refactoring    |
+| Browser understands | ✅                               | ❌ Browser ultimately runs JS      |
+| Superset            | —                                | TS is a superset of JS             |
+
+---
+
+## 4. Simple Interview Answer
+
+> **JavaScript is a dynamically typed programming language used to build web applications. TypeScript is a superset of JavaScript that adds static typing and other development features. TypeScript is converted into JavaScript before it runs in the browser.**
+
+### Easy way to remember
+
+**JavaScript = Programming language**
+
+**TypeScript = JavaScript + Type Safety + Extra Features**
+
 # TypeScript — Interview Notes
 
 ## 1. `type` vs `interface`
@@ -17,7 +85,7 @@ interface UserNew extends User {
   address: string;
 }
 // extends
-const p: UserNew = { name: "", age: 9, address: "" };
+const p: UserNew = { name: '', age: 9, address: '' };
 ```
 
 ```ts
@@ -28,7 +96,7 @@ type Person = {
 type PersonNew = Person & { age: number }; // intersection
 
 type Name = string; // alias type
-type Status = "Success" | "fail"; // union
+type Status = 'Success' | 'fail'; // union
 type Emp = [string, number, ...boolean[]]; // tuple
 ```
 
@@ -38,7 +106,7 @@ A union (`|`) means "one of these types." An intersection (`&`) means "all of th
 
 ```ts
 let id: number | string; // union
-type Status = "Success" | "fail"; // union
+type Status = 'Success' | 'fail'; // union
 
 type PersonNew = Person & { age: number }; // intersection
 ```
@@ -65,7 +133,7 @@ interface User {
 
 function getData(): APIResponse<User> {
   return {
-    data: { name: "Manish" },
+    data: { name: 'Manish' },
     loading: false,
   };
 }
@@ -75,14 +143,14 @@ function getFirst<T>(items: T[]): T {
 }
 
 const number = getFirst([1, 2, 3]);
-const name = getFirst(["John", "Mike"]);
+const name = getFirst(['John', 'Mike']);
 
 function display<T>(value: T): T {
   console.log(value);
   return value;
 }
 
-display<string>("Hello");
+display<string>('Hello');
 ```
 
 ## 5. Utility Types
@@ -107,8 +175,8 @@ type UserPartial = Partial<User>;
 
 function updateUser(id: number, changes: UserPartial) {}
 
-updateUser(1, { name: "Manish" }); // only name
-updateUser(1, { email: "m@gmail.com" }); // only email
+updateUser(1, { name: 'Manish' }); // only name
+updateUser(1, { email: 'm@gmail.com' }); // only email
 // No need to send all fields
 ```
 
@@ -119,9 +187,9 @@ Every field must be present.
 ```ts
 const newUser: Required<User> = {
   id: 1,
-  name: "Manish",
-  email: "m@gmail.com",
-  password: "1234", // error if missing
+  name: 'Manish',
+  email: 'm@gmail.com',
+  password: '1234', // error if missing
 };
 ```
 
@@ -130,12 +198,12 @@ const newUser: Required<User> = {
 Show user in UI, don't expose password.
 
 ```ts
-type UserProfile = Pick<User, "id" | "name" | "email">;
+type UserProfile = Pick<User, 'id' | 'name' | 'email'>;
 
 const profile: UserProfile = {
   id: 1,
-  name: "Manish",
-  email: "m@gmail.com",
+  name: 'Manish',
+  email: 'm@gmail.com',
   // password not here
 };
 ```
@@ -145,12 +213,12 @@ const profile: UserProfile = {
 Everything except password.
 
 ```ts
-type SafeUser = Omit<User, "password">;
+type SafeUser = Omit<User, 'password'>;
 
 const safeUser: SafeUser = {
   id: 1,
-  name: "Manish",
-  email: "m@gmail.com",
+  name: 'Manish',
+  email: 'm@gmail.com',
   // password removed
 };
 ```
@@ -160,12 +228,12 @@ const safeUser: SafeUser = {
 ```ts
 const user: Readonly<User> = {
   id: 1,
-  name: "Manish",
-  email: "m@gmail.com",
-  password: "1234",
+  name: 'Manish',
+  email: 'm@gmail.com',
+  password: '1234',
 };
 
-user.name = "Kumar"; // error — cannot assign to readonly
+user.name = 'Kumar'; // error — cannot assign to readonly
 ```
 
 ### `Record<K, T>`
@@ -173,12 +241,12 @@ user.name = "Kumar"; // error — cannot assign to readonly
 Map role to permissions.
 
 ```ts
-type Role = "admin" | "editor" | "viewer";
+type Role = 'admin' | 'editor' | 'viewer';
 
 const permissions: Record<Role, string[]> = {
-  admin: ["read", "write", "delete"],
-  editor: ["read", "write"],
-  viewer: ["read"],
+  admin: ['read', 'write', 'delete'],
+  editor: ['read', 'write'],
+  viewer: ['read'],
 };
 ```
 
@@ -213,7 +281,7 @@ Broad type → check → specific type.
 function print(value: string | number) {
   // value is string | number here
 
-  if (typeof value === "string") {
+  if (typeof value === 'string') {
     // value is string here
     console.log(value.toUpperCase());
   } else {
@@ -282,17 +350,17 @@ Type guards narrow union types at runtime. I use `typeof` for primitives, `insta
 At runtime (plain JS), `typeof` returns a value's type as a string:
 
 ```ts
-const val = "hello";
+const val = 'hello';
 console.log(typeof val); // "string" — at runtime, JS
 ```
 
-In TypeScript's type position, `typeof` extracts the *type* of a value — handy so you don't hand-write an interface that already exists as an object literal.
+In TypeScript's type position, `typeof` extracts the _type_ of a value — handy so you don't hand-write an interface that already exists as an object literal.
 
 ```ts
 const user = {
   id: 1,
-  name: "Manish",
-  email: "m@gmail.com",
+  name: 'Manish',
+  email: 'm@gmail.com',
 };
 
 // Don't write interface manually — extract it from the object
@@ -300,7 +368,7 @@ type UserType = typeof user;
 // { id: number; name: string; email: string; }
 
 const config = {
-  apiUrl: "https://api.example.com",
+  apiUrl: 'https://api.example.com',
   timeout: 3000,
   retries: 3,
 };
@@ -314,7 +382,7 @@ function init(cfg: Config) {} // reuse the type
 Combine `typeof` with `keyof` to pull key names straight from a value:
 
 ```ts
-const user = { id: 1, name: "Manish", email: "m@gmail.com" };
+const user = { id: 1, name: 'Manish', email: 'm@gmail.com' };
 
 type UserKeys = keyof typeof user;
 // "id" | "name" | "email"

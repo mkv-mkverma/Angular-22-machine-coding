@@ -23,10 +23,8 @@ Lazy loading is a technique where we split application code into separate chunks
 const routes: Routes = [
   {
     path: 'name',
-    loadComponent: () =>
-      import('url')
-        .then(m => m.component)
-  }
+    loadComponent: () => import('url').then((m) => m.component),
+  },
 ];
 ```
 
@@ -56,11 +54,11 @@ I analyze bundle size by first doing a production build, checking Angular's init
 
 Core Web Vitals are Google's key user-experience metrics. The three current metrics are LCP for loading performance, INP for interaction responsiveness, and CLS for visual stability. In Angular, I would improve them through techniques like reducing the initial bundle, lazy loading and deferring non-critical code, optimizing images and fonts, minimizing expensive JavaScript and rendering work, and reserving space for dynamic content.
 
-| Metric | Measures                                           | Target   |
-| ------ | -------------------------------------------------- | -------- |
-| LCP    | How quickly the main content appears               | ≤ 2.5s   |
-| INP    | How quickly the page responds to user interactions | ≤ 200ms  |
-| CLS    | How much the layout unexpectedly moves             | ≤ 0.1    |
+| Metric | Measures                                           | Target  |
+| ------ | -------------------------------------------------- | ------- |
+| LCP    | How quickly the main content appears               | ≤ 2.5s  |
+| INP    | How quickly the page responds to user interactions | ≤ 200ms |
+| CLS    | How much the layout unexpectedly moves             | ≤ 0.1   |
 
 **Common causes:**
 
@@ -142,13 +140,9 @@ Then I optimize the application based on whether the problem is bundle size, ren
 **How do I generate WebP / AVIF?** `npm install sharp`
 
 ```js
-await sharp('image.jpg')
-  .webp({ quality: 80 })
-  .toFile('image.webp');
+await sharp('image.jpg').webp({ quality: 80 }).toFile('image.webp');
 
-await sharp('image.jpg')
-  .avif({ quality: 60 })
-  .toFile('image.avif');
+await sharp('image.jpg').avif({ quality: 60 }).toFile('image.avif');
 ```
 
 ```text
@@ -221,7 +215,7 @@ DOM update only where necessary
 **OnPush**
 
 - `@Input()` reference changes
-- An event handled in the component/subtree
+- Event from component/child
 - async pipe receives a new value
 - `markForCheck()`, `detectChanges()`, Signal
 
@@ -260,9 +254,7 @@ imports: [CdkVirtualScrollViewport, CdkVirtualForOf, CdkFixedSizeVirtualScroll, 
 
 ```html
 <cdk-virtual-scroll-viewport [itemSize]="50" style="height: 400px">
-  <div *cdkVirtualFor="let item of items; trackBy: trackById">
-    {{ item.name }}
-  </div>
+  <div *cdkVirtualFor="let item of items; trackBy: trackById">{{ item.name }}</div>
 </cdk-virtual-scroll-viewport>
 ```
 
@@ -285,7 +277,7 @@ trackById(index: number, item: Item) {
 search.valueChanges.pipe(
   debounceTime(300),
   distinctUntilChanged(),
-  switchMap(term => this.http.get(`/api/search?q=${term}`))
+  switchMap((term) => this.http.get(`/api/search?q=${term}`)),
 );
 ```
 
@@ -461,11 +453,11 @@ Dashboard / alert
 
 For example, suppose our frontend expects an API response with a `data` property, but a backend change starts returning `result`. TypeScript doesn't validate the runtime JSON structure, so code accessing `response.data[0]` can throw a runtime TypeError. Our GlobalErrorHandler captures that error along with the route and other context and reports it to our monitoring system. I then reproduce the customer scenario locally, identify the API contract mismatch as the RCA, fix the mapping or contract, add a regression test, validate it in staging with QA, and then deploy the patch.
 
-| Layer              | Responsibility                                              |
-| ------------------ | ----------------------------------------------------------- |
-| HTTP Interceptor   | common HTTP concerns                                        |
-| catchError         | expected RxJS/API failure handling                          |
-| Component/service  | UI/business-specific recovery                               |
+| Layer              | Responsibility                                                  |
+| ------------------ | --------------------------------------------------------------- |
+| HTTP Interceptor   | common HTTP concerns                                            |
+| catchError         | expected RxJS/API failure handling                              |
+| Component/service  | UI/business-specific recovery                                   |
 | GlobalErrorHandler | unexpected/unhandled application errors + centralized reporting |
 
 **"Telemetry"** is the umbrella term: errors + performance (Core Web Vitals, TTFB, etc.) + usage, all correlated by session/build. New Relic, Sentry and Datadog RUM are the two most common dedicated frontend error-monitoring choices outside the Microsoft stack — purpose-built for exactly what GlobalErrorHandler is trying to do: fingerprinting, source-map upload, release tracking, breadcrumbs, alerting.

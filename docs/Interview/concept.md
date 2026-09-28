@@ -32,6 +32,8 @@ Rule 2: -, *, / convert strings to numbers
 
 "11" / 1 // 11
 
+"A" - 1 // NaN
+
 Sepcial
 
 console.log(1 + "1" - 1 + "2" * 2)

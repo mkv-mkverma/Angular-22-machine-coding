@@ -189,6 +189,12 @@ export const routes: Routes = [
       import('./features/monitoring/sentry-test/sentry-test').then((m) => m.SentryTest),
   },
   {
+    path: 'employees',
+    title: 'employee node api call',
+    loadComponent: () =>
+      import('./features/node-playground/employee/employee').then((c) => c.Employee),
+  },
+  {
     path: '**',
     component: PageNotFound,
     title: 'Page Not Found',

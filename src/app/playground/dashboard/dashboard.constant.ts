@@ -120,4 +120,16 @@ export const DASHBOARD_CARDS: DashboardCard[] = [
     icon: '🐞',
     route: '/sentry-test',
   },
+  {
+    title: 'Stock Price',
+    description: 'Tracks a live stock price with signals.',
+    icon: '📈',
+    route: '/stock-price',
+  },
+  {
+    title: 'Employees',
+    description: 'Fetches employees from the Node API and renders them via toSignal.',
+    icon: '👥',
+    route: '/employees',
+  },
 ];

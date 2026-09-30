@@ -1,5 +1,15 @@
 # RxJS Interview Notes
 
+```
+ Both return an Observable.
+
+ of() → emits the values passed to it.
+
+ from() → converts an iterable, Promise,
+          or Observable-like input into an Observable
+          and emits its values.
+```
+
 ## Flattening Operators
 
 ### `exhaustMap`

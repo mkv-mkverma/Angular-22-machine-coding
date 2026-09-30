@@ -1,0 +1,32 @@
+<p>employee works!</p>
+
+<form (submit)="editId() !== null ? handleEmpUpdate($event) : onSubmit($event)">
+  <input type="text" [formField]="employeeForm.name" placeholder="enter name" />
+  <input type="email" [formField]="employeeForm.email" placeholder="enter email" />
+  <button type="submit">{{ editId() !== null ? 'Update' : 'Submit' }}</button>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (emp of employees(); track emp.id) {
+      <tr>
+        <td>{{ emp.id }}</td>
+        <td>{{ emp.name }}</td>
+        <td>{{ emp.email }}</td>
+        <td>
+          <button (click)="handleEmpEdit(emp)">Edit</button>
+
+          <button (click)="handleEmpDelete(emp.id)">Delete</button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

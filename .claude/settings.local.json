@@ -3,7 +3,8 @@
     "allow": [
       "Bash(npm run *)",
       "Bash(npm ls *)",
-      "Bash(node -e \"require.resolve\\('playwright-core'\\)\")"
+      "Bash(node -e \"require.resolve\\('playwright-core'\\)\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d['projects'][list\\(d['projects'].keys\\(\\)\\)[0]]['architect'].get\\('test', d['projects'][list\\(d['projects'].keys\\(\\)\\)[0]].get\\('architect',{}\\)\\), indent=2\\)\\)\")"
     ]
   }
 }

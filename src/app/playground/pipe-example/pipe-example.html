@@ -1,0 +1,16 @@
+<p>pipe-example works!</p>
+<p>{{ employee() | json }}</p>
+<h2>{{ timer$ | async | date: 'dd-MM-yyyy | hh:mm:s:a' }}</h2>
+
+<ul>
+  @for (emp of employee(); track emp.id) {
+    <li>Name: {{ emp.name | uppercase }}</li>
+    <li>Name: {{ emp.name | lowercase }}</li>
+    <li>Name: {{ emp.name | capitalcase }}</li>
+    <li>Age: {{ emp.age | number }}</li>
+    <li>City: {{ emp.city | titlecase }}</li>
+    <li>Salary: {{ emp.salary | currency: 'INR' }}</li>
+    <li>Salary: {{ emp.salary | percent }}</li>
+    <li>Date of Birth: {{ emp.dob | date }}</li>
+  }
+</ul>

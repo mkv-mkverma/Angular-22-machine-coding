@@ -33,10 +33,6 @@ export class Forms {
   onSubmit(e: SubmitEvent) {
     e.preventDefault();
     if (!this.employeeForm().valid()) return;
-
-    console.log(this.employeeForm());
-    console.log(this.employee());
-
     this.reset();
   }
 

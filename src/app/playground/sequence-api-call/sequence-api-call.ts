@@ -18,7 +18,7 @@ interface CommentsResponse {
   comments: unknown[];
 }
 /**
- * https://dummyjson.com/users/1
+https://dummyjson.com/users/1
 https://dummyjson.com/posts/user/${userId}
 https://dummyjson.com/posts/${postId}/comments
 

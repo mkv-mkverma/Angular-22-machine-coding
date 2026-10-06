@@ -1,9 +1,10 @@
 import { Component, inject, OnDestroy } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DASHBOARD_CARDS } from './dashboard.constant';
+import { PipeExample } from '../pipe-example/pipe-example';
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterLink],
+  imports: [RouterLink, PipeExample],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })

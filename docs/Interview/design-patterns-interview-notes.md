@@ -1,61 +1,159 @@
-# Design Patterns
+# Angular Design Patterns — Cheat Note
 
-## Dependency Injection
+### Smart & Dumb Components
+- **Smart:** Handles business logic, API/state, data.
+- **Dumb:** Mainly handles UI/presentation.
+- Smart → passes data → Dumb
+- Dumb → emits events → Smart
 
-Dependency Injection means a class receives its dependencies from outside rather than creating them itself.
+**Remember:**  
+> Smart = Logic | Dumb = UI
 
-## Singleton
+---
 
-Only one shared instance.
+### Singleton
+- **Single shared instance** of a service.
+- Angular services with `providedIn: 'root'` are commonly singleton services.
 
-## Observer
+**Remember:**  
+> Singleton = One instance shared across the application.
 
-One object publishes changes, and multiple subscribers react to those changes.
+---
 
-## Factory
-
-Centralize object creation. Instead of spreading object creation everywhere, the Factory encapsulates object creation and returns the appropriate implementation based on some input.
+### Dependency Injection (DI)
+- Inject dependencies instead of creating them yourself.
 
 ```ts
-class ComponentFactory {
-  create(type: string) {
-    if (type === 'chart') {
-      return new ChartComponent();
-    }
-
-    if (type === 'table') {
-      return new TableComponent();
-    }
-  }
-}
+constructor(private userService: UserService) {}
 ```
 
 Instead of:
 
 ```ts
-new ChartComponent();
-new TableComponent();
+const service = new UserService();
 ```
 
-## Decorator
+**Remember:**  
+> DI = Receive dependency, don't create it yourself.
 
-`@Component`, `@Service`, `@Directive`, `@Pipe`
+---
 
-The decorator adds metadata/behavior to a class.
+### Observer Pattern
+- One object **publishes/emits** changes.
+- Subscribers **listen/react** to those changes.
+- Angular uses this heavily through **RxJS Observables**.
 
-## Facade
+```text
+Observable → emit → Subscribers
+```
 
-Hide complicated logic behind a simple interface.
+**Remember:**  
+> Observer = Subscribe and react to changes.
 
-## Which pattern do I need?
+---
 
-| "I need to..."                    | Pattern              |
-| ---------------------------------- | --------------------- |
-| React to changes                   | Observer               |
-| Choose different behavior          | Strategy               |
-| Create different objects           | Factory                |
-| Hide complex logic                 | Facade                 |
-| Convert one interface → another    | Adapter                |
-| Share one instance                 | Singleton              |
-| Provide dependencies               | Dependency Injection   |
-| Add metadata/behavior              | Decorator              |
+### NgRx — State Management
+- Centralized management of application state.
+- Useful when state is **shared and complex**.
+
+```text
+Component
+   ↓
+ Action
+   ↓
+ Store
+   ↓
+ Reducer
+   ↓
+ State
+   ↓
+ Selector
+   ↓
+ Component
+```
+
+**Remember:**  
+> NgRx = Centralized application state.
+
+---
+
+### Strategy Pattern
+- Define different strategies/behaviors and choose one at runtime.
+
+Example:
+
+```text
+Payment
+ ├── UPI Strategy
+ ├── Card Strategy
+ └── PayPal Strategy
+```
+
+**Remember:**  
+> Strategy = Choose different behavior.
+
+---
+
+### Facade Pattern
+- **Hide complex logic** behind a simple interface.
+- Often used to hide complex service/NgRx logic from components.
+
+```text
+Component
+    ↓
+ Facade
+    ↓
+Service / NgRx / API
+```
+
+**Remember:**  
+> Facade = Hide complexity.
+
+---
+
+### Adapter Pattern
+- **Convert one interface into another** expected by the application.
+
+Backend response:
+
+```ts
+{
+  first_name: "John",
+  last_name: "Doe"
+}
+```
+
+Application expects:
+
+```ts
+{
+  firstName: "John",
+  lastName: "Doe"
+}
+```
+
+**Remember:**  
+> Adapter = Convert one interface → another.
+
+---
+
+## ⚡ One-Line Revision
+
+| Need | Pattern |
+|---|---|
+| Separate UI & business logic | **Smart/Dumb** |
+| One shared instance | **Singleton** |
+| Inject dependency | **Dependency Injection** |
+| React to changes | **Observer** |
+| Manage shared application state | **NgRx** |
+| Choose different behavior | **Strategy** |
+| Hide complex logic | **Facade** |
+| Convert one interface → another | **Adapter** |
+| Create different objects | **Factory** |
+| Add metadata/behavior | **Decorator** |
+
+## 🧠 Easy Memory Trick
+
+**DI → Singleton → Observer → State → Strategy → Facade → Adapter**
+
+> **"Inject, Share, Observe, Manage, Choose, Hide, Convert."**

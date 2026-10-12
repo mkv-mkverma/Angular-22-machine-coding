@@ -132,4 +132,10 @@ export const DASHBOARD_CARDS: DashboardCard[] = [
     icon: '👥',
     route: '/employees',
   },
+  {
+    title: 'Input / Output Signal',
+    description: 'Parent-child communication with signal-based input() and output().',
+    icon: '🔁',
+    route: '/input-output-signal',
+  },
 ];

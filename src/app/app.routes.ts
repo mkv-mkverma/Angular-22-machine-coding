@@ -184,6 +184,12 @@ export const routes: Routes = [
       import('./playground/signals/stock-price/stock-price').then((c) => c.StockPrice),
   },
   {
+    path: 'input-output-signal',
+    title: 'Input Output Signal',
+    loadComponent: () =>
+      import('./playground/signals/input-output-signal/parent').then((c) => c.Parent),
+  },
+  {
     path: 'sentry-test',
     loadComponent: () =>
       import('./features/monitoring/sentry-test/sentry-test').then((m) => m.SentryTest),

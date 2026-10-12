@@ -1,0 +1,6 @@
+<h2>input output signal!</h2>
+
+<p>Count: {{ count() }}</p>
+<p>Double: {{ doubleCount() }}</p>
+
+<app-child [count]="count()" (handleChildCount)="handleClick($event)"></app-child>

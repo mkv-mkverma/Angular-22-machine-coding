@@ -1,4 +1,4 @@
-import { Component, computed, effect, signal } from '@angular/core';
+import { Component, computed, effect, linkedSignal, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Autocomplete } from './autocomplete/autocomplete';
 import { Forms } from './forms/forms';
@@ -48,14 +48,14 @@ export class Signals {
 
   constructor() {
     /**
-     * effect() is an Angular Signals API used for side effects. 
-     * It automatically tracks the signals read inside its callback and 
-     * reruns when those signals change. 
-     * I would use it for things like logging, analytics, 
-     * localStorage synchronization, or interacting with external APIs. 
-     * I wouldn't normally use an effect to calculate derived state; 
-     * for that I would use computed(). 
-     * Signals manage state, computed derives state, 
+     * effect() is an Angular Signals API used for side effects.
+     * It automatically tracks the signals read inside its callback and
+     * reruns when those signals change.
+     * I would use it for things like logging, analytics,
+     * localStorage synchronization, or interacting with external APIs.
+     * I wouldn't normally use an effect to calculate derived state;
+     * for that I would use computed().
+     * Signals manage state, computed derives state,
      * and effects handle side effects."
      */
 
@@ -78,5 +78,38 @@ export class Signals {
         clearInterval(timer);
       });
     });
+
+    effect(() => {
+      console.log('Cart quantity:', this.quantity());
+    });
+  }
+
+  // Another Example
+
+  quantity = signal(1);
+  price = signal(1000);
+  discount = signal(10);
+
+  finalPrice = computed(() => {
+    console.log('Cart quantity in computed:', this.quantity());
+    return this.price() * (1 - this.discount() / 100) * this.quantity();
+  });
+
+  addItem() {
+    // set() replaces the value.
+    // update() calculates a new value from the previous value.
+    this.quantity.update((q) => q + 1);
+  }
+
+  productsM = signal(['Laptop', 'Mobile', 'Tablet']);
+
+  // writable , lazy, Maintains its current signal value
+  selectedProduct = linkedSignal(() => this.productsM()[0]);
+  // readonly, lazy, memoize the calculate value
+  selectedProductComp = computed(() => this.productsM()[0]);
+
+  onChange() {
+    this.productsM.set(['Keyboard', 'Mouse']);
+    this.selectedProduct.set('Mobile');
   }
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { catchError, from, mergeMap, of, toArray } from 'rxjs';
+import { catchError, finalize, from, mergeMap, of, scan, tap, toArray } from 'rxjs';
 
 interface UserSummary {
   id: number;
@@ -49,4 +49,41 @@ export class MergeMap {
       error: (e) => console.log(e),
       complete: () => console.log('Completed'),
     });
+
+  // Making sequence API call and delay
+
+  runRequests() {
+    const ids = Array.from({ length: 10 }, (_, i) => i + 1);
+    const startTime = Date.now();
+
+    console.log('Starting all requests...');
+
+    from(ids)
+      .pipe(
+        // concatMap(id) and remove 10
+        mergeMap((id) => {
+          // First 5 calls: 1 second.
+          // Next 5 calls: 5 seconds.
+          const seconds = id <= 5 ? 1 : 5;
+
+          console.log(`Request ${id} started`);
+
+          return this.http.get<unknown>(`https://httpbin.org/delay/${seconds}?id=${id}`).pipe(
+            tap(() => {
+              const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+
+              console.log(`Request ${id} completed at ${elapsed}s`);
+            }),
+          );
+        }, 10), // Maximum 10 concurrent requests, add 3 then Maximum 10 concurrent requests
+        scan((acc, response) => [...acc, response], [] as unknown[]), // kepp adding to ui
+        // toArray(), // to give combine result
+
+        finalize(() => console.log('All requests finished')),
+      )
+      .subscribe({
+        next: (data) => console.log(data),
+        error: (err) => console.error('API error:', err),
+      });
+  }
 }
